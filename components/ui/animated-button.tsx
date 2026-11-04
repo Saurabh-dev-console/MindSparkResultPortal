@@ -50,3 +50,4 @@ export function AnimatedButton({
     </motion.button>
   );
 }
+

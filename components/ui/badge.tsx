@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trophy, Medal, Award, CheckCircle } from 'lucide-react';
+import { Trophy, Medal, Award, CheckCircle2 } from 'lucide-react';
 import { PrizeWinner } from '@/types';
 
 interface RankBadgeProps {
@@ -39,13 +39,22 @@ export function RankBadge({ rank, size = 'sm' }: RankBadgeProps) {
           <span>Rank 3 (Bronze)</span>
         </span>
       );
-    default:
+    case 4:
       return (
         <span
           className={`inline-flex items-center gap-1.5 rounded-md font-bold bg-blue-50 text-blue-900 border border-blue-200 shadow-2xs ${sizeClasses}`}
         >
           <Award className={`${iconSize} text-blue-700 shrink-0`} />
-          <span>Consolation</span>
+          <span>Consolation Prize</span>
+        </span>
+      );
+    default:
+      return (
+        <span
+          className={`inline-flex items-center gap-1.5 rounded-md font-bold bg-emerald-50 text-emerald-900 border border-emerald-300 shadow-2xs ${sizeClasses}`}
+        >
+          <CheckCircle2 className={`${iconSize} text-emerald-600 shrink-0`} />
+          <span>Appeared & Passed</span>
         </span>
       );
   }

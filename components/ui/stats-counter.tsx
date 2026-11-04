@@ -41,3 +41,4 @@ export function StatsCounter({ value, suffix = '', duration = 1200 }: StatsCount
     </span>
   );
 }
+
