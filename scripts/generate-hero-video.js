@@ -158,3 +158,4 @@ generateHeroVideo().catch((err) => {
   console.error('Fatal generator error:', err);
   process.exit(1);
 });
+

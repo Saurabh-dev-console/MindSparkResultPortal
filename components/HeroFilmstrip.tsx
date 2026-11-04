@@ -12,8 +12,8 @@ export default function HeroFilmstrip() {
   return (
     <div className="w-full overflow-hidden py-4 sm:py-6 relative mask-linear">
       {/* Subtle fade edges on left & right for cinematic transition */}
-      <div className="absolute left-0 inset-y-0 w-12 sm:w-28 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 inset-y-0 w-12 sm:w-28 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 inset-y-0 w-12 sm:w-28 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 inset-y-0 w-12 sm:w-28 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none" />
 
       {/* Infinite Scrolling Track */}
       <div className="animate-marquee flex items-center space-x-4 sm:space-x-5">
@@ -45,3 +45,4 @@ export default function HeroFilmstrip() {
     </div>
   );
 }
+
