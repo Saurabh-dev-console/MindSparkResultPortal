@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Award, Search, ShieldCheck, ArrowUpRight, CheckCircle2, X, Download, FileText, UserCheck, Sparkles } from 'lucide-react';
 import { prizeWinners } from '@/data/prizeWinners';
 import { categories } from '@/data/categories';
@@ -66,7 +67,16 @@ export default function VerifySearchPage() {
     <div className="py-12 md:py-20 bg-slate-50 min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-10 flex flex-col items-center">
+          <div className="relative w-20 h-20 mb-4 rounded-full overflow-hidden shadow-md ring-2 ring-emerald-600/30 bg-white">
+            <Image
+              src="/images/meena-shah-mindspark-emblem.png"
+              alt="Meena Shah Public School Mindspark 2026"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-wider bg-slate-100 text-slate-800 border border-slate-300 mb-3">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
             <span>Digital Certificate & Verification Portal</span>

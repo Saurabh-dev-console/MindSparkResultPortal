@@ -74,10 +74,10 @@ export default function CertificateView({ winner }: CertificateViewProps) {
         ></div>
 
         {/* Certificate Watermark in Center */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.035] pointer-events-none select-none w-96 h-96">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.05] pointer-events-none select-none w-96 h-96">
           <Image
-            src="/images/school-logo.png"
-            alt="Watermark"
+            src="/images/meena-shah-mindspark-emblem.png"
+            alt="Official Watermark"
             width={400}
             height={400}
             className="object-contain"
@@ -87,14 +87,14 @@ export default function CertificateView({ winner }: CertificateViewProps) {
         {/* Certificate Header */}
         <div className="relative text-center pb-6 border-b border-slate-200">
           <div className="flex items-center justify-between gap-4 max-w-4xl mx-auto mb-4">
-            {/* School Crest */}
-            <div className="w-20 h-20 relative shrink-0">
+            {/* Left Official Emblem */}
+            <div className="w-24 h-24 relative shrink-0 rounded-full overflow-hidden border-2 border-red-600/30 p-0.5 shadow-sm bg-white">
               <Image
-                src="/images/school-logo.png"
-                alt="Meena Shah Public School Crest"
-                width={80}
-                height={80}
-                className="object-contain"
+                src="/images/meena-shah-mindspark-emblem.png"
+                alt="Meena Shah Public School Official Crest"
+                width={96}
+                height={96}
+                className="object-cover w-full h-full rounded-full"
                 priority
               />
             </div>
@@ -112,14 +112,14 @@ export default function CertificateView({ winner }: CertificateViewProps) {
               </p>
             </div>
 
-            {/* Event Logo */}
-            <div className="w-20 h-20 relative shrink-0">
+            {/* Right Official Seal / Emblem */}
+            <div className="w-24 h-24 relative shrink-0 rounded-full overflow-hidden border-2 border-red-600/30 p-0.5 shadow-sm bg-white">
               <Image
-                src="/images/mindspark-logo.png"
-                alt="Mindspark 2026 Logo"
-                width={80}
-                height={80}
-                className="object-contain"
+                src="/images/meena-shah-mindspark-emblem.png"
+                alt="Mindspark 2026 Crest"
+                width={96}
+                height={96}
+                className="object-cover w-full h-full rounded-full"
                 priority
               />
             </div>
@@ -223,34 +223,16 @@ export default function CertificateView({ winner }: CertificateViewProps) {
               <p className="text-[11px] text-slate-500">Meena Shah Public School</p>
             </div>
 
-            {/* Seal / Stamp */}
+            {/* Seal / Stamp with Logo */}
             <div className="flex flex-col items-center justify-center">
-              <div
-                className={`w-24 h-24 rounded-full border-4 border-double p-2 flex flex-col items-center justify-center text-center shadow-inner ${
-                  isPassed
-                    ? 'border-emerald-700 bg-emerald-50/60'
-                    : 'border-amber-700 bg-amber-50/60'
-                }`}
-              >
-                <ShieldCheck
-                  className={`w-7 h-7 mb-0.5 ${
-                    isPassed ? 'text-emerald-800' : 'text-amber-800'
-                  }`}
+              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-red-600/40 p-0.5 shadow-md bg-white">
+                <Image
+                  src="/images/meena-shah-mindspark-emblem.png"
+                  alt="Official Seal"
+                  width={96}
+                  height={96}
+                  className="object-cover w-full h-full rounded-full"
                 />
-                <span
-                  className={`text-[9px] font-black uppercase tracking-tighter leading-tight ${
-                    isPassed ? 'text-emerald-950' : 'text-amber-950'
-                  }`}
-                >
-                  OFFICIAL SEAL
-                </span>
-                <span
-                  className={`text-[8px] font-bold ${
-                    isPassed ? 'text-emerald-900' : 'text-amber-900'
-                  }`}
-                >
-                  MINDSPARK &apos;26
-                </span>
               </div>
               <div className="mt-2 text-[10px] font-mono font-semibold text-slate-500">
                 REG: {winner.regNo}

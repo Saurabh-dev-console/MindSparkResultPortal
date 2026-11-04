@@ -4,12 +4,12 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'MINDSPARK 2026 — Official Rankers & Prize Winners Portal | Meena Shah Public School',
-  description: 'Official 100% Static Results, Medals Podium, and Certificate Verification Registry for the Mindspark Inter-School Competition.',
+  title: 'MINDSPARK 2026 — Official Results & Certificate Portal | Meena Shah Public School',
+  description: 'Official 100% Static Results, Medals Podium, and Certificate Verification Registry for the Mindspark Inter-School Competition at Meena Shah Public School.',
   icons: {
-    icon: '/images/mindspark-logo.png',
-    shortcut: '/images/mindspark-logo.png',
-    apple: '/images/school-logo.png',
+    icon: '/images/meena-shah-mindspark-emblem.png',
+    shortcut: '/images/meena-shah-mindspark-emblem.png',
+    apple: '/images/meena-shah-mindspark-emblem.png',
   },
 };
 
@@ -28,4 +28,3 @@ export default function RootLayout({
     </html>
   );
 }
-

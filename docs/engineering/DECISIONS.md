@@ -35,3 +35,17 @@
 - **Decision**: Defer deployment of Onyx. The 100% static nature of the portal makes an 8GB RAM vector database cluster redundant and disproportionate.
 - **Consequences**: Zero infrastructure bloat while keeping activation instructions preserved in `ONYX_INTEGRATION.md`.
 
+## ADR-006: 18 Class-Wise Programmes & Dual Certificate Pipeline (Rankers + Passed)
+- **Date**: 2026-11-04
+- **Status**: **ACCEPTED**
+- **Context**: User expanded scope to cover all 18 official competition categories (Play Group to College/Graduation) and requested official passing/participation certificates for all non-ranker attendees.
+- **Decision**: Map all 18 programmes into `data/categories.ts` (cat-01 to cat-18). Implement dual certificate rendering in `CertificateView.tsx`: Distinction (gold border, Rank 1-3 & Consolation) and Participation/Passed (emerald border, on-demand digital generation + pre-rendered archive).
+- **Consequences**: Full coverage of all school groups and seamless self-service certificate generation for students.
+
+## ADR-007: Official Circular Medallion Branding & Local Asset Pipeline
+- **Date**: 2026-11-04
+- **Status**: **ACCEPTED**
+- **Context**: Official high-resolution circular crest emblem provided by the school administration (`meena-shah-mindspark-emblem.png`).
+- **Decision**: Deploy emblem across all primary visual surfaces (Navbar, Hero, Results header, Verify header, Gallery header, Footer, Favicon, Certificate watermark, and Dual Certificate header emblems). Migrate gallery to local static images (`EVENT-IMAGES-*.JPG`) to eliminate external CDN dependencies.
+- **Consequences**: 100% self-contained, offline-ready, prestigious institutional identity.
+

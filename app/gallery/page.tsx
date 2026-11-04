@@ -1,4 +1,5 @@
 import React from 'react';
+import NextImage from 'next/image';
 import { Image as ImageIcon, Sparkles } from 'lucide-react';
 import GalleryView from '@/components/GalleryView';
 import { galleryImages } from '@/data/gallery';
@@ -13,7 +14,16 @@ export default function GalleryPage() {
     <div className="py-10 md:py-16 bg-slate-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-12 flex flex-col items-center">
+          <div className="relative w-20 h-20 mb-4 rounded-full overflow-hidden shadow-md ring-2 ring-blue-600/30 bg-white">
+            <NextImage
+              src="/images/meena-shah-mindspark-emblem.png"
+              alt="Meena Shah Public School Mindspark 2026"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-800 border border-blue-200 mb-3">
             <ImageIcon className="w-3.5 h-3.5 text-blue-600" />
             <span>Event Archive & Media</span>

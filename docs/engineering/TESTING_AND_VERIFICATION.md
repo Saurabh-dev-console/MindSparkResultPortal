@@ -37,22 +37,22 @@
    ✓ Compiled successfully
      Linting and checking validity of types ...
      Collecting page data ...
-   ✓ Generating static pages (59/59)
+   ✓ Generating static pages (67/67)
      Finalizing page optimization ...
      Collecting build traces ...
 
   Route (app)                              Size     First Load JS
-  ┌ ○ /                                    2.42 kB         108 kB
-  ├ ○ /_not-found                          138 B          87.5 kB
-  ├ ○ /gallery                             2.52 kB        95.5 kB
-  ├ ○ /results                             11.1 kB         116 kB
-  ├ ○ /verify                              3.71 kB         103 kB
-  └ ● /verify/[regNo]                      4.15 kB         106 kB
-      ├ /verify/MS26-ROB-101
-      ├ /verify/MS26-ROB-102
-      ├ /verify/MS26-ROB-103
-      └ [+49 more paths]
-  + First Load JS shared by all            87.4 kB
+  ┌ ○ /                                    6.86 kB         158 kB
+  ├ ○ /_not-found                          138 B          87.6 kB
+  ├ ○ /gallery                             2.53 kB        95.7 kB
+  ├ ○ /results                             11 kB           162 kB
+  ├ ○ /verify                              5.91 kB         160 kB
+  └ ● /verify/[regNo]                      1.19 kB         151 kB
+      ├ /verify/MS26-CAT01-01
+      ├ /verify/MS26-CAT01-02
+      ├ /verify/MS26-CAT01-03
+      └ [+57 more paths]
+  + First Load JS shared by all            87.5 kB
 
   ○  (Static)  prerendered as static content
   ●  (SSG)     prerendered as static HTML (uses getStaticProps)

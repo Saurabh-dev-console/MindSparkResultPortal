@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import Image from 'next/image';
 import { Trophy, Layers, ShieldCheck, Award } from 'lucide-react';
 import { categories } from '@/data/categories';
 import { prizeWinners } from '@/data/prizeWinners';
@@ -36,7 +37,16 @@ export default function ResultsPage() {
     <div className="py-10 md:py-16 bg-slate-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="mb-10 text-center max-w-3xl mx-auto">
+        <div className="mb-10 text-center max-w-3xl mx-auto flex flex-col items-center">
+          <div className="relative w-20 h-20 mb-4 rounded-full overflow-hidden shadow-md ring-2 ring-red-600/30 bg-white">
+            <Image
+              src="/images/meena-shah-mindspark-emblem.png"
+              alt="Meena Shah Public School Mindspark 2026"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-wider bg-slate-100 text-slate-800 border border-slate-300 mb-3">
             <Trophy className="w-3.5 h-3.5 text-amber-600" />
             <span>MIND SPARK 2026 — 18 Programmes Directory</span>
