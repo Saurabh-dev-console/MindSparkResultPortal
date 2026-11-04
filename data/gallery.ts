@@ -1,0 +1,88 @@
+import { GalleryImage } from '@/types';
+
+export const galleryImages: GalleryImage[] = [
+  {
+    id: 'gal-01',
+    title: 'Grand Inauguration & Lamp Lighting Ceremony',
+    category: 'stage',
+    imageUrl: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Dignitaries, educators, and chief guests inaugurating MINDSPARK 2026 at Meena Shah Public School main auditorium.',
+  },
+  {
+    id: 'gal-02',
+    title: 'Champion Felicitation & Trophy Presentation',
+    category: 'awards',
+    imageUrl: 'https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Proud Gold Medal winners holding the coveted Mindspark Rolling Trophy on the celebration stage.',
+  },
+  {
+    id: 'gal-03',
+    title: 'Autonomous Robotics Arena in Action',
+    category: 'science',
+    imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Teams demonstrating autonomous obstacle avoidance rovers in the robotics competition arena.',
+  },
+  {
+    id: 'gal-04',
+    title: 'Young Scientists Explaining Working Prototypes',
+    category: 'science',
+    imageUrl: 'https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Students presenting eco-friendly renewable energy innovations to the panel of visiting judges.',
+  },
+  {
+    id: 'gal-05',
+    title: 'Silver & Bronze Medalists on the Podium',
+    category: 'awards',
+    imageUrl: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Cheering runners-up receiving their certified medals and merit awards before faculty and parents.',
+  },
+  {
+    id: 'gal-06',
+    title: 'High-Stakes Parliamentary Debate Round',
+    category: 'stage',
+    imageUrl: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Dynamic orators engaging in a heated discussion on artificial intelligence and societal ethics.',
+  },
+  {
+    id: 'gal-07',
+    title: 'Coding Hackathon Midnight Sprint',
+    category: 'science',
+    imageUrl: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Student programmers building fullstack web solutions during the intense 6-hour hackathon.',
+  },
+  {
+    id: 'gal-08',
+    title: 'Heartfelt Candid Celebrations with Mentors',
+    category: 'candid',
+    imageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Unfiltered joy as students and mentor teachers celebrate after the winners declaration ceremony.',
+  },
+  {
+    id: 'gal-09',
+    title: 'Art & Design Exhibition Gallery Walkthrough',
+    category: 'candid',
+    imageUrl: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Visitors admiring stunning oil paintings and 3D digital art created by young talents.',
+  },
+  {
+    id: 'gal-10',
+    title: 'Drone Pilot Demonstration in Flight Zone',
+    category: 'science',
+    imageUrl: 'https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Aeromodelling champions flying student-built quadcopters with precision gyro stabilization.',
+  },
+  {
+    id: 'gal-11',
+    title: 'Auditorium Thunderous Standing Ovation',
+    category: 'stage',
+    imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Audience and participants applauding all champions during the gala closing ceremony.',
+  },
+  {
+    id: 'gal-12',
+    title: 'Special Commendation & Consolation Honors',
+    category: 'awards',
+    imageUrl: 'https://images.unsplash.com/photo-1531545514256-b1400bc00f31?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Recognizing persevering students with certificates of distinction and commemorative medals.',
+  },
+];
