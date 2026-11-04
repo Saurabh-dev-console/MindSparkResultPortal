@@ -33,5 +33,9 @@ export interface GalleryImage {
   title: string;
   category: 'stage' | 'awards' | 'science' | 'candid';
   imageUrl: string;
+  thumbnailUrl?: string;
   caption: string;
+  width?: number;
+  height?: number;
+  orientation?: 'landscape' | 'portrait';
 }

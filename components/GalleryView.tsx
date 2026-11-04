@@ -93,23 +93,42 @@ export default function GalleryView({ images }: GalleryViewProps) {
           <SpotlightCard
             key={image.id}
             onClick={() => handleOpenLightbox(index)}
-            className="group cursor-pointer flex flex-col justify-between hover:border-slate-400 transition-colors"
+            className="group cursor-pointer flex flex-col justify-between hover:border-slate-400 transition-colors overflow-hidden"
           >
-            {/* Image Container */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-900">
+            {/* Image Container with Natural 3:2 Aspect Ratio */}
+            <div className="relative aspect-[3/2] w-full overflow-hidden bg-slate-950 flex items-center justify-center">
+              {/* Subtle ambient blur backdrop for portrait photos */}
+              {image.orientation === 'portrait' && (
+                <Image
+                  src={image.thumbnailUrl || image.imageUrl}
+                  alt=""
+                  fill
+                  aria-hidden="true"
+                  className="object-cover blur-md opacity-35 scale-110 pointer-events-none"
+                />
+              )}
+
+              {/* Main Image */}
               <Image
-                src={image.imageUrl}
+                src={image.thumbnailUrl || image.imageUrl}
                 alt={image.title}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover group-hover:scale-103 transition-transform duration-300"
+                loading="lazy"
+                className={`transition-transform duration-300 group-hover:scale-103 ${
+                  image.orientation === 'portrait'
+                    ? 'object-contain relative z-10 p-1'
+                    : 'object-cover'
+                }`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-between p-4">
-                <span className="text-white text-xs font-semibold flex items-center space-x-1">
+
+              {/* Hover Overlay with Category Pill & Expand Hint */}
+              <div className="absolute inset-0 z-20 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-between p-4">
+                <span className="text-white text-xs font-semibold flex items-center space-x-1.5">
                   <Maximize2 className="w-3.5 h-3.5" />
-                  <span>Click to expand</span>
+                  <span>Click to view full photo</span>
                 </span>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider bg-white/20 text-white px-2 py-0.5 rounded">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider bg-white/20 backdrop-blur-xs text-white px-2.5 py-0.5 rounded shadow-2xs">
                   {image.category}
                 </span>
               </div>
@@ -118,9 +137,16 @@ export default function GalleryView({ images }: GalleryViewProps) {
             {/* Caption & Info */}
             <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-500 mb-1 block">
-                  {image.category}
-                </span>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-500">
+                    {image.category}
+                  </span>
+                  {image.orientation === 'portrait' && (
+                    <span className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
+                      Portrait
+                    </span>
+                  )}
+                </div>
                 <h3 className="font-bold text-slate-950 text-base leading-snug group-hover:text-blue-900 transition-colors">
                   {image.title}
                 </h3>

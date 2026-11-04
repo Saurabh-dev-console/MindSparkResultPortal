@@ -63,7 +63,7 @@ export default function Navbar() {
             {/* High-Res Circular Official Emblem */}
             <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-red-600/30 shadow-md group-hover:scale-105 transition-transform duration-200 bg-white shrink-0">
               <Image
-                src="/images/meena-shah-mindspark-emblem.png"
+                src="/images/meena-shah-mindspark-emblem.webp"
                 alt="Meena Shah Public School - Mindspark 2026 Official Emblem"
                 width={56}
                 height={56}

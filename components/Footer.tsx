@@ -13,10 +13,11 @@ export default function Footer() {
             <div className="flex items-center space-x-3.5">
               <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-red-600/40 bg-white p-0.5 shrink-0 shadow-md">
                 <Image
-                  src="/images/meena-shah-mindspark-emblem.png"
+                  src="/images/meena-shah-mindspark-emblem.webp"
                   alt="Meena Shah Public School Crest"
                   width={56}
                   height={56}
+                  loading="lazy"
                   className="object-cover w-full h-full rounded-full"
                 />
               </div>

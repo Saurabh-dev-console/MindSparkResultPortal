@@ -20,7 +20,84 @@ export default function HomePage() {
       {/* 1. Hero & Metrics Section */}
       <Hero />
 
-      {/* 2. Championship Showcase (Grand Gold Medalists) */}
+      {/* 2. Official Inauguration Ceremony & Judicial Dignitaries Showcase */}
+      <section className="py-12 md:py-16 bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 rounded-3xl overflow-hidden border border-slate-800 shadow-xl text-white">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-10 lg:p-12">
+              {/* Left Column: Official Context & Judicial Dignitaries */}
+              <div className="lg:col-span-6 space-y-5">
+                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-wider bg-red-600/20 text-red-400 border border-red-500/30">
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                  <span>Official Event Inauguration</span>
+                </div>
+
+                <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+                  Inaugurated by Hon&apos;ble Members of the Judiciary
+                </h2>
+
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                  The grand competition of <strong>MINDSPARK 2026</strong> was officially inaugurated at the Meena Shah Public School Ramnagar campus in the presence of distinguished judicial officers, institutional trustees, and academic evaluators.
+                </p>
+
+                <div className="space-y-2.5 pt-1">
+                  <div className="flex items-start space-x-3 bg-slate-800/60 p-3 rounded-xl border border-slate-700/60">
+                    <ShieldCheck className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400 block">
+                        District & Sessions Judge
+                      </span>
+                      <span className="text-sm font-bold text-white">Mr. Durg Narain Singh</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3 bg-slate-800/60 p-3 rounded-xl border border-slate-700/60">
+                    <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400 block">
+                        Chief Judicial Magistrate (CJM)
+                      </span>
+                      <span className="text-sm font-bold text-white">Mr. Amit Singh</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3 bg-slate-800/60 p-3 rounded-xl border border-slate-700/60">
+                    <ShieldCheck className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-blue-400 block">
+                        Additional District & Sessions Judge
+                      </span>
+                      <span className="text-sm font-bold text-white">Mr. Danish Hasnain</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: High-Res Documentary Photograph */}
+              <div className="lg:col-span-6">
+                <div className="relative aspect-[3/2] w-full rounded-2xl overflow-hidden border-2 border-slate-700/80 shadow-2xl group bg-slate-950">
+                  <Image
+                    src="/images/inauguration-dignitaries.webp"
+                    alt="MINDSPARK 2026 Inauguration Ceremony by District Judges at Meena Shah Public School"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                    className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex items-end p-4 sm:p-5 pointer-events-none">
+                    <div className="flex items-center space-x-2 text-xs font-mono text-slate-200">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                      <span>Official Inauguration Ceremony • Ramnagar Campus Main Arena</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Championship Showcase (Grand Gold Medalists) */}
       <section className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4 pb-6 border-b border-slate-200">
           <div>
@@ -193,16 +270,32 @@ export default function HomePage() {
             <Link
               key={img.id}
               href="/gallery/"
-              className="group block relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 aspect-[4/3] shadow-xs hover:border-slate-400 transition-colors"
+              className="group block relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-950 aspect-[3/2] shadow-xs hover:border-slate-400 transition-colors"
             >
+              {/* Soft ambient blur backdrop for portrait images */}
+              {img.orientation === 'portrait' && (
+                <Image
+                  src={img.thumbnailUrl || img.imageUrl}
+                  alt=""
+                  fill
+                  aria-hidden="true"
+                  className="object-cover blur-md opacity-35 scale-110 pointer-events-none"
+                />
+              )}
+
               <Image
-                src={img.imageUrl}
+                src={img.thumbnailUrl || img.imageUrl}
                 alt={img.title}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover group-hover:scale-103 transition-transform duration-300"
+                loading="lazy"
+                className={`transition-transform duration-300 group-hover:scale-103 ${
+                  img.orientation === 'portrait'
+                    ? 'object-contain relative z-10 p-1'
+                    : 'object-cover'
+                }`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent p-5 flex flex-col justify-end">
+              <div className="absolute inset-0 z-20 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent p-5 flex flex-col justify-end">
                 <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400 mb-1">
                   {img.category}
                 </span>

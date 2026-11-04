@@ -8,6 +8,8 @@ import StaticSearch from '@/components/StaticSearch';
 import { SpotlightCard } from '@/components/ui/spotlight-card';
 import { StatsCounter } from '@/components/ui/stats-counter';
 import { AnimatedButton } from '@/components/ui/animated-button';
+import HeroVideoReel from '@/components/HeroVideoReel';
+import HeroFilmstrip from '@/components/HeroFilmstrip';
 
 export default function Hero() {
   const metrics = [
@@ -49,7 +51,7 @@ export default function Hero() {
           <div className="relative mb-6 group">
             <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-red-600/40 shadow-xl bg-white p-0.5 group-hover:scale-105 transition-transform duration-300">
               <Image
-                src="/images/meena-shah-mindspark-emblem.png"
+                src="/images/meena-shah-mindspark-emblem.webp"
                 alt="Meena Shah Public School - MINDSPARK 2026 Official Crest"
                 width={144}
                 height={144}
@@ -110,10 +112,18 @@ export default function Hero() {
               </AnimatedButton>
             </Link>
           </div>
+
+          {/* Official 4K Event Video Reel (Auto-looping 36 Highlights) */}
+          <HeroVideoReel />
+        </div>
+
+        {/* Infinite Continuous Filmstrip Ribbon Stream */}
+        <div className="mt-4 sm:mt-6">
+          <HeroFilmstrip />
         </div>
 
         {/* 4 Spotlight Metric Cards (Vengeance UI pattern) */}
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {metrics.map((item, idx) => {
             const Icon = item.icon;
             return (

@@ -70,7 +70,7 @@ export default function VerifySearchPage() {
         <div className="text-center mb-10 flex flex-col items-center">
           <div className="relative w-20 h-20 mb-4 rounded-full overflow-hidden shadow-md ring-2 ring-emerald-600/30 bg-white">
             <Image
-              src="/images/meena-shah-mindspark-emblem.png"
+              src="/images/meena-shah-mindspark-emblem.webp"
               alt="Meena Shah Public School Mindspark 2026"
               fill
               className="object-contain"

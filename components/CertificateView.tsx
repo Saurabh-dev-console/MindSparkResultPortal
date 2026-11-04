@@ -76,7 +76,7 @@ export default function CertificateView({ winner }: CertificateViewProps) {
         {/* Certificate Watermark in Center */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.05] pointer-events-none select-none w-96 h-96">
           <Image
-            src="/images/meena-shah-mindspark-emblem.png"
+            src="/images/meena-shah-mindspark-emblem.webp"
             alt="Official Watermark"
             width={400}
             height={400}
@@ -90,7 +90,7 @@ export default function CertificateView({ winner }: CertificateViewProps) {
             {/* Left Official Emblem */}
             <div className="w-24 h-24 relative shrink-0 rounded-full overflow-hidden border-2 border-red-600/30 p-0.5 shadow-sm bg-white">
               <Image
-                src="/images/meena-shah-mindspark-emblem.png"
+                src="/images/meena-shah-mindspark-emblem.webp"
                 alt="Meena Shah Public School Official Crest"
                 width={96}
                 height={96}
@@ -115,7 +115,7 @@ export default function CertificateView({ winner }: CertificateViewProps) {
             {/* Right Official Seal / Emblem */}
             <div className="w-24 h-24 relative shrink-0 rounded-full overflow-hidden border-2 border-red-600/30 p-0.5 shadow-sm bg-white">
               <Image
-                src="/images/meena-shah-mindspark-emblem.png"
+                src="/images/meena-shah-mindspark-emblem.webp"
                 alt="Mindspark 2026 Crest"
                 width={96}
                 height={96}
@@ -227,10 +227,11 @@ export default function CertificateView({ winner }: CertificateViewProps) {
             <div className="flex flex-col items-center justify-center">
               <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-red-600/40 p-0.5 shadow-md bg-white">
                 <Image
-                  src="/images/meena-shah-mindspark-emblem.png"
+                  src="/images/meena-shah-mindspark-emblem.webp"
                   alt="Official Seal"
                   width={96}
                   height={96}
+                  loading="lazy"
                   className="object-cover w-full h-full rounded-full"
                 />
               </div>

@@ -57,13 +57,14 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
               <div className="w-full flex flex-col items-center group">
                 {/* Photo frame */}
                 <div className="relative mb-3">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-slate-400 bg-slate-800 flex items-center justify-center relative shadow-md">
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-slate-400 bg-slate-800 flex items-center justify-center relative shadow-md shrink-0">
                     {rank2.photoUrl ? (
                       <Image
                         src={rank2.photoUrl}
                         alt={rank2.name}
                         width={80}
                         height={80}
+                        loading="lazy"
                         className="object-cover w-full h-full"
                       />
                     ) : (
@@ -120,13 +121,14 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
 
                 {/* Photo frame */}
                 <div className="relative mb-3">
-                  <div className="w-24 h-24 rounded-2xl overflow-hidden border-3 border-amber-400 bg-amber-950/40 flex items-center justify-center relative shadow-xl">
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden border-3 border-amber-400 bg-amber-950/40 flex items-center justify-center relative shadow-xl shrink-0">
                     {rank1.photoUrl ? (
                       <Image
                         src={rank1.photoUrl}
                         alt={rank1.name}
                         width={96}
                         height={96}
+                        loading="lazy"
                         className="object-cover w-full h-full"
                       />
                     ) : (
@@ -181,13 +183,14 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
               <div className="w-full flex flex-col items-center group">
                 {/* Photo frame */}
                 <div className="relative mb-3">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-amber-700 bg-slate-800 flex items-center justify-center relative shadow-md">
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-amber-700 bg-slate-800 flex items-center justify-center relative shadow-md shrink-0">
                     {rank3.photoUrl ? (
                       <Image
                         src={rank3.photoUrl}
                         alt={rank3.name}
                         width={80}
                         height={80}
+                        loading="lazy"
                         className="object-cover w-full h-full"
                       />
                     ) : (

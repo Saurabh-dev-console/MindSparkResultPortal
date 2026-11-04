@@ -17,7 +17,7 @@ export default function GalleryPage() {
         <div className="text-center max-w-3xl mx-auto mb-12 flex flex-col items-center">
           <div className="relative w-20 h-20 mb-4 rounded-full overflow-hidden shadow-md ring-2 ring-blue-600/30 bg-white">
             <NextImage
-              src="/images/meena-shah-mindspark-emblem.png"
+              src="/images/meena-shah-mindspark-emblem.webp"
               alt="Meena Shah Public School Mindspark 2026"
               fill
               className="object-contain"
@@ -34,6 +34,15 @@ export default function GalleryPage() {
           <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
             High-resolution visual memories capturing stage inaugurations, competitive science arenas, runner-up felicitations, and gold trophy honors.
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-4 text-xs font-mono font-bold text-slate-600">
+            <span className="bg-white px-3 py-1 rounded-md border border-slate-200 shadow-2xs">
+              36 Verified Event Photographs
+            </span>
+            <span className="hidden sm:inline text-slate-400">•</span>
+            <span className="bg-white px-3 py-1 rounded-md border border-slate-200 shadow-2xs">
+              Ramnagar Campus Ceremonies
+            </span>
+          </div>
         </div>
 
         {/* Client-Side Filterable Gallery View with Lightbox */}
