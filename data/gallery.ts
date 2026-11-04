@@ -86,3 +86,4 @@ export const galleryImages: GalleryImage[] = [
     caption: 'Recognizing persevering students with certificates of distinction and commemorative medals.',
   },
 ];
+

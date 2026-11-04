@@ -32,3 +32,4 @@ export interface GalleryImage {
   imageUrl: string;
   caption: string;
 }
+

@@ -35,3 +35,4 @@ All governance, architecture, and verification documentation is maintained in `d
 - `npm run dev`: Launch local development server at `http://localhost:3000`
 - `npm run build`: Compile 100% static SSG production build to `/out`
 - `npm run lint`: Run Next.js and TypeScript linting suite
+

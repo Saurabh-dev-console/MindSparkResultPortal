@@ -146,3 +146,4 @@ export const categories: Category[] = [
     description: 'Viable social enterprise pitches, market unit economics, and working minimum viable products.',
   },
 ];
+

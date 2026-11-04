@@ -279,3 +279,4 @@ export default function CertificateView({ winner }: CertificateViewProps) {
     </div>
   );
 }
+

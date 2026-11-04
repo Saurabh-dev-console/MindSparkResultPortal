@@ -190,3 +190,4 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
     </div>
   );
 }
+

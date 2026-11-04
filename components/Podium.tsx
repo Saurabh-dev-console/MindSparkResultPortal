@@ -253,3 +253,4 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
     </div>
   );
 }
+
