@@ -1,9 +1,8 @@
 'use client';
 
 import React from 'react';
-import { motion, HTMLMotionProps } from 'framer-motion';
 
-interface AnimatedButtonProps extends HTMLMotionProps<'button'> {
+interface AnimatedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'gold' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
@@ -17,7 +16,7 @@ export function AnimatedButton({
   ...props
 }: AnimatedButtonProps) {
   const baseStyles =
-    'relative inline-flex items-center justify-center font-semibold rounded-xl transition-colors overflow-hidden group select-none cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2';
+    'relative inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-150 hover:scale-[1.015] active:scale-[0.985] overflow-hidden group select-none cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2';
 
   const variants = {
     primary:
@@ -37,17 +36,13 @@ export function AnimatedButton({
   };
 
   return (
-    <motion.button
-      whileHover={{ scale: 1.015 }}
-      whileTap={{ scale: 0.985 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+    <button
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {/* Vengeance UI subtle sweep shine overlay */}
       <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
       <span className="relative z-10 flex items-center gap-2">{children}</span>
-    </motion.button>
+    </button>
   );
 }
-
