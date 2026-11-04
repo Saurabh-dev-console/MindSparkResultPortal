@@ -37,3 +37,4 @@
      * Rank 3 (Bronze): Deep amber-950 text on amber-100 surface.
      * Consolation: Deep blue-900 text on blue-50 surface.
    - Full keyboard accessibility for interactive elements, dialogs, and modals (Escape, ArrowLeft, ArrowRight).
+

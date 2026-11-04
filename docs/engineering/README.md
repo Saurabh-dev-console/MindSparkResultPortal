@@ -24,3 +24,4 @@ This directory serves as the engineering governance repository for the **MINDSPA
 - **Framework**: Next.js 14.2.35 (App Router)
 - **Static Export Target**: `out/` (Zero server dependencies)
 - **Total Static Routes Generated**: 59 static routes pre-rendered successfully
+

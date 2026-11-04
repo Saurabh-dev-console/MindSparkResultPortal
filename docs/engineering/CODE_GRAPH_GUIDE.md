@@ -50,3 +50,4 @@ graph TD
 ## 5. Maintenance Protocol
 - Changed files are re-analyzed before risky edits.
 - No secrets or credentials are ever indexed in `.agent-data/`.
+

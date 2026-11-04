@@ -49,3 +49,4 @@ Every substantial modification or feature implementation must define:
 - **Goal**: Complete all 10 engineering governance files and `AGENTS.md` per Antigravity Master Agent Setup v2.
 - **Affected Files**: `AGENTS.md`, `docs/engineering/*.md`.
 - **Verification**: Cross-referenced all requirements against PDF and master prompt specifications.
+

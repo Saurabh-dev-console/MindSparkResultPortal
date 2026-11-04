@@ -48,3 +48,4 @@ mindspark-static-portal/
 ## 3. Data Flow & State Management
 - **Search & Filtering**: Handled entirely through React `useState` and `useMemo` hooks against static in-memory TypeScript arrays. Instant response time (< 5ms) without HTTP request overhead.
 - **Certificate Verification**: When an external user scans a QR code or opens `/verify/MS26-ROB-101/`, the static CDN serves the pre-compiled `out/verify/MS26-ROB-101/index.html` file immediately with zero server lag.
+

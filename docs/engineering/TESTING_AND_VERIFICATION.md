@@ -67,20 +67,20 @@
 
 ## 3. Integration & Capability Status Audit
 
-| Integration | Classification | Status | Result / Detail |
-| :--- | :--- | :--- | :--- |
-| **REA** | Tool | `CONFIGURED AND VERIFIED` | Evaluated on-demand for reverse engineering |
-| **Ponytail** | Tool / Pattern | `CONFIGURED AND VERIFIED` | Minimal, clean code architecture applied |
-| **Hallmark** | Skill / UI | `CONFIGURED AND VERIFIED` | Tailwind design system verified |
-| **Humanizer** | Skill / Copy | `CONFIGURED AND VERIFIED` | Natural language copy audited across all UI text |
-| **Onyx** | Platform (MCP) | `NOT INSTALLED` | Deferred (zero server requirement; documented in `ONYX_INTEGRATION.md`) |
-| **Impeccable** | Skill / UI Audit | `CONFIGURED AND VERIFIED` | WCAG 2.2 AA contrast verified |
-| **UI UX Pro Max**| Skill / Intelligence | `CONFIGURED AND VERIFIED` | Brand token alignment verified |
-| **Last30Days** | Skill / Research | `CONFIGURED AND VERIFIED` | On-demand research capability mapped |
-| **Scrapling** | Python Library | `NOT INSTALLED` | Omitted (SSG portal uses in-tree static data) |
-| **Diagram Design**| Skill / Diagrams | `CONFIGURED AND VERIFIED` | Mermaid & Markdown architecture diagrams verified |
-| **Animaster** | UI Library | `PENDING USER INPUT` | Blocked until official URL is supplied |
-| **Task Chunking**| Workflow | `CONFIGURED AND VERIFIED` | Local workflow active via `IMPLEMENTATION_WORKFLOW.md` |
+| Integration | Classification | Local Skill Path | Status | Result / Detail |
+| :--- | :--- | :--- | :--- | :--- |
+| **REA** | Agent Skill | `.agents/skills/rea/` | `INSTALLED AND VERIFIED` | Upstream files preserved; reverse engineering ready |
+| **Ponytail** | Agent Skill | `.agents/skills/ponytail/` | `INSTALLED AND VERIFIED` | Upstream files preserved; clean implementation skill |
+| **Hallmark** | Agent Skill | `.agents/skills/hallmark/` | `INSTALLED AND VERIFIED` | Upstream UI design skill verified |
+| **Humanizer** | Agent Skill | `.agents/skills/humanizer/` | `INSTALLED AND VERIFIED` | Natural language copywriting skill active |
+| **Onyx** | Platform (MCP) | N/A | `NOT INSTALLED` | Deferred (zero server requirement; documented in `ONYX_INTEGRATION.md`) |
+| **Impeccable** | Agent Skill | `.agents/skills/impeccable/` | `INSTALLED AND VERIFIED` | UI audit & design refinement skill active |
+| **UI UX Pro Max**| Agent Skill | `.agents/skills/ui-ux-pro-max/` | `INSTALLED AND VERIFIED` | Design system intelligence skill active |
+| **Last30Days** | Agent Skill | `.agents/skills/last30days/` | `INSTALLED AND VERIFIED` | Tech research skill active |
+| **Scrapling** | Python Library | N/A | `NOT INSTALLED` | Omitted (SSG portal uses in-tree static data) |
+| **Diagram Design**| Agent Skill | `.agents/skills/diagram-design/` | `INSTALLED AND VERIFIED` | Technical diagrams skill active |
+| **Animaster** | UI Library | N/A | `PENDING USER INPUT` | Blocked until official URL is supplied |
+| **Task Chunking**| Workflow | N/A | `CONFIGURED AND VERIFIED` | Local workflow active via `IMPLEMENTATION_WORKFLOW.md` |
 
 ---
 

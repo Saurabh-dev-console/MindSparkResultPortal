@@ -25,3 +25,4 @@ If institutional knowledge indexing across thousands of PDF research papers or a
 1. Deploy Onyx via Docker Compose in an isolated VPC or WSL2 environment.
 2. Configure scoped read-only MCP credentials stored exclusively in local OS secret vaults (never committed to repository).
 3. Connect Antigravity IDE via sanctioned MCP server configuration.
+

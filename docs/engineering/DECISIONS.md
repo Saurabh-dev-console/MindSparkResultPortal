@@ -34,3 +34,4 @@
 - **Context**: Antigravity Master Setup includes Onyx as an optional platform integration.
 - **Decision**: Defer deployment of Onyx. The 100% static nature of the portal makes an 8GB RAM vector database cluster redundant and disproportionate.
 - **Consequences**: Zero infrastructure bloat while keeping activation instructions preserved in `ONYX_INTEGRATION.md`.
+

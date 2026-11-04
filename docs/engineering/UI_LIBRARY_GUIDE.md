@@ -45,3 +45,4 @@
    - Official academic certificate layout featuring institutional seals, signatures, and `@media print` rules for A4 landscape output.
 7. **`GalleryView` (`components/GalleryView.tsx`)**:
    - Filterable photo grid with category tabs (`all`, `awards`, `stage`, `science`, `candid`) and modal lightbox with keyboard shortcuts.
+
