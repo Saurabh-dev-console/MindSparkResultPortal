@@ -2,9 +2,11 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Award, Search, Trophy, Medal, ShieldCheck, ChevronRight, CheckCircle2, X, ExternalLink } from 'lucide-react';
+import { Award, Search, ShieldCheck, ArrowUpRight, CheckCircle2, X } from 'lucide-react';
 import { prizeWinners } from '@/data/prizeWinners';
-import { PrizeWinner } from '@/types';
+import { RankBadge } from '@/components/ui/badge';
+import { AnimatedButton } from '@/components/ui/animated-button';
+import { SpotlightCard } from '@/components/ui/spotlight-card';
 
 export default function VerifySearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -21,49 +23,16 @@ export default function VerifySearchPage() {
     );
   }, [searchTerm]);
 
-  const getRankBadge = (rank: PrizeWinner['rank']) => {
-    switch (rank) {
-      case 1:
-        return (
-          <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
-            <Trophy className="w-3 h-3 text-amber-600" />
-            <span>Rank 1 (Gold)</span>
-          </span>
-        );
-      case 2:
-        return (
-          <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-200 text-slate-800 border border-slate-300">
-            <Medal className="w-3 h-3 text-slate-600" />
-            <span>Rank 2 (Silver)</span>
-          </span>
-        );
-      case 3:
-        return (
-          <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-950 border border-amber-300">
-            <Medal className="w-3 h-3 text-amber-700" />
-            <span>Rank 3 (Bronze)</span>
-          </span>
-        );
-      default:
-        return (
-          <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-blue-900 border border-blue-200">
-            <Award className="w-3 h-3 text-blue-600" />
-            <span>Consolation</span>
-          </span>
-        );
-    }
-  };
-
   return (
     <div className="py-12 md:py-20 bg-slate-50 min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200 mb-3">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-wider bg-slate-100 text-slate-800 border border-slate-300 mb-3">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
             <span>Official Credential Registry</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight">
             Verify Certificate of Distinction
           </h1>
           <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
@@ -72,7 +41,7 @@ export default function VerifySearchPage() {
         </div>
 
         {/* Verification Input Box */}
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-lg mb-10">
+        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm mb-10">
           <label htmlFor="verify-input" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
             Enter Roll Number, Registration No, or Candidate Name:
           </label>
@@ -86,12 +55,13 @@ export default function VerifySearchPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="e.g. 260101, MS26-ROB-101, or Aarav Sharma"
-              className="w-full pl-12 pr-10 py-4 bg-slate-50 border border-slate-300 rounded-2xl text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all"
+              className="w-full pl-12 pr-10 py-4 bg-slate-50 border border-slate-300 rounded-2xl text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+                aria-label="Clear search"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -104,7 +74,7 @@ export default function VerifySearchPage() {
               <button
                 key={sample}
                 onClick={() => setSearchTerm(sample)}
-                className="font-mono bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 transition-colors cursor-pointer"
+                className="font-mono bg-slate-100 hover:bg-slate-200 text-slate-800 px-2.5 py-1 rounded-lg border border-slate-200 transition-colors cursor-pointer"
               >
                 {sample}
               </button>
@@ -117,19 +87,19 @@ export default function VerifySearchPage() {
           <div className="space-y-4 mb-12">
             <div className="flex items-center justify-between text-xs text-slate-500 font-semibold px-1">
               <span>Verified Records Found: {searchResults.length}</span>
-              <span>100% Pre-Rendered Certificate Pages</span>
+              <span className="font-mono">100% Pre-Rendered Certificate Pages</span>
             </div>
 
             {searchResults.length > 0 ? (
               searchResults.map((winner) => (
-                <div
+                <SpotlightCard
                   key={winner.id}
-                  className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                  className="p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
                 >
                   <div className="space-y-1.5">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-extrabold text-base text-slate-900">{winner.name}</span>
-                      {getRankBadge(winner.rank)}
+                      <span className="font-extrabold text-base text-slate-950">{winner.name}</span>
+                      <RankBadge rank={winner.rank} />
                     </div>
                     <div className="text-xs text-slate-500 flex flex-wrap items-center gap-x-2 gap-y-1">
                       <span className="font-mono font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded">
@@ -141,19 +111,18 @@ export default function VerifySearchPage() {
                       <span>•</span>
                       <span className="text-slate-700 font-medium">{winner.schoolName}</span>
                     </div>
-                    <div className="text-xs text-blue-700 font-medium">
-                      {winner.categoryName} ({winner.className}) • Score: {winner.score}/{winner.maxScore}
+                    <div className="text-xs text-slate-700 font-medium">
+                      {winner.categoryName} ({winner.className}) • Score: <span className="font-mono font-bold text-slate-900">{winner.score}/{winner.maxScore}</span>
                     </div>
                   </div>
 
-                  <Link
-                    href={`/verify/${winner.regNo}/`}
-                    className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-sm transition-all whitespace-nowrap self-stretch sm:self-auto justify-center"
-                  >
-                    <span>View & Print Certificate</span>
-                    <ExternalLink className="w-4 h-4" />
+                  <Link href={`/verify/${winner.regNo}/`} className="self-stretch sm:self-auto">
+                    <AnimatedButton variant="primary" size="sm" className="w-full sm:w-auto">
+                      <span>View & Print Certificate</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </AnimatedButton>
                   </Link>
-                </div>
+                </SpotlightCard>
               ))
             ) : (
               <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center text-slate-500">
@@ -167,7 +136,7 @@ export default function VerifySearchPage() {
         )}
 
         {/* Verification Architecture Assurance Box */}
-        <div className="bg-gradient-to-r from-slate-900 to-slate-950 text-white rounded-2xl p-6 sm:p-8 border border-slate-800">
+        <div className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 border border-slate-800">
           <h3 className="font-bold text-base flex items-center space-x-2 text-amber-400">
             <CheckCircle2 className="w-5 h-5 text-amber-400" />
             <span>Tamper-Proof Static Verification Details</span>
@@ -191,4 +160,3 @@ export default function VerifySearchPage() {
     </div>
   );
 }
-

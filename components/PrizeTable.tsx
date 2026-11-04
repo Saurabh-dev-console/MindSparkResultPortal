@@ -2,8 +2,9 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Trophy, Medal, Award, Search, ExternalLink, ChevronRight, X } from 'lucide-react';
+import { Search, ArrowUpRight, X } from 'lucide-react';
 import { PrizeWinner } from '@/types';
+import { RankBadge } from '@/components/ui/badge';
 
 interface PrizeTableProps {
   winners: PrizeWinner[];
@@ -26,53 +27,20 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
     );
   }, [winners, filterQuery]);
 
-  const renderRankBadge = (rank: PrizeWinner['rank'], positionTitle: string) => {
-    switch (rank) {
-      case 1:
-        return (
-          <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 shadow-xs">
-            <Trophy className="w-3.5 h-3.5 text-amber-600" />
-            <span>1st (Gold)</span>
-          </span>
-        );
-      case 2:
-        return (
-          <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-200 text-slate-800 border border-slate-300">
-            <Medal className="w-3.5 h-3.5 text-slate-600" />
-            <span>2nd (Silver)</span>
-          </span>
-        );
-      case 3:
-        return (
-          <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-950 border border-amber-300">
-            <Medal className="w-3.5 h-3.5 text-amber-700" />
-            <span>3rd (Bronze)</span>
-          </span>
-        );
-      default:
-        return (
-          <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-800 border border-blue-200">
-            <Award className="w-3.5 h-3.5 text-blue-600" />
-            <span>Consolation</span>
-          </span>
-        );
-    }
-  };
-
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mt-8">
-      {/* Table Top Toolbar */}
-      <div className="p-5 sm:p-6 bg-slate-50/80 border-b border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden mt-8">
+      {/* Table Toolbar */}
+      <div className="p-5 sm:p-6 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h3 className="font-bold text-lg text-slate-900 flex items-center space-x-2">
-            <span>Official Rankers Roll — {categoryName}</span>
+          <h3 className="font-extrabold text-lg text-slate-950">
+            Certified Rankers Roll — {categoryName}
           </h3>
           <p className="text-xs text-slate-500 mt-0.5">
-            Exclusively verified rankers awarded honors and credentials ({filtered.length} total)
+            Strict directory of awarded candidates ({filtered.length} total)
           </p>
         </div>
 
-        {/* Real-time search inside current category */}
+        {/* In-category search */}
         <div className="relative w-full sm:w-72">
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
             <Search className="w-4 h-4" />
@@ -82,12 +50,13 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
             value={filterQuery}
             onChange={(e) => setFilterQuery(e.target.value)}
             placeholder="Filter rankers in this category..."
-            className="w-full pl-9 pr-8 py-2 bg-white text-xs sm:text-sm text-slate-900 border border-slate-300 rounded-lg placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full pl-9 pr-8 py-2 bg-white text-xs sm:text-sm text-slate-900 border border-slate-300 rounded-xl placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-slate-900 transition-all"
           />
           {filterQuery && (
             <button
               onClick={() => setFilterQuery('')}
               className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+              aria-label="Clear filter"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -99,14 +68,14 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse text-sm">
           <thead>
-            <tr className="bg-slate-100/75 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase tracking-wider">
-              <th scope="col" className="py-3.5 px-4 sm:px-6">Rank</th>
+            <tr className="bg-slate-100/80 border-b border-slate-200 text-xs font-bold text-slate-700 uppercase tracking-wider">
+              <th scope="col" className="py-3.5 px-4 sm:px-6">Standing</th>
               <th scope="col" className="py-3.5 px-4 sm:px-6">Roll / Reg No</th>
-              <th scope="col" className="py-3.5 px-4 sm:px-6">Winner Name</th>
-              <th scope="col" className="py-3.5 px-4 sm:px-6">School Name</th>
+              <th scope="col" className="py-3.5 px-4 sm:px-6">Candidate</th>
+              <th scope="col" className="py-3.5 px-4 sm:px-6">Institution</th>
               <th scope="col" className="py-3.5 px-4 sm:px-6">Class</th>
               <th scope="col" className="py-3.5 px-4 sm:px-6">Score</th>
-              <th scope="col" className="py-3.5 px-4 sm:px-6">Prize Details</th>
+              <th scope="col" className="py-3.5 px-4 sm:px-6">Honors Awarded</th>
               <th scope="col" className="py-3.5 px-4 sm:px-6 text-right">Certificate</th>
             </tr>
           </thead>
@@ -115,16 +84,14 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
               filtered.map((winner) => (
                 <tr
                   key={winner.id}
-                  className="hover:bg-blue-50/40 transition-colors duration-100"
+                  className="hover:bg-slate-50 transition-colors"
                 >
-                  {/* Rank */}
                   <td className="py-4 px-4 sm:px-6 whitespace-nowrap">
-                    {renderRankBadge(winner.rank, winner.positionTitle)}
+                    <RankBadge rank={winner.rank} />
                   </td>
 
-                  {/* Roll / Reg No */}
                   <td className="py-4 px-4 sm:px-6 whitespace-nowrap">
-                    <div className="font-mono font-semibold text-slate-900 text-xs">
+                    <div className="font-mono font-bold text-slate-950 text-xs">
                       {winner.rollNo}
                     </div>
                     <div className="font-mono text-[11px] text-slate-500">
@@ -132,46 +99,40 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
                     </div>
                   </td>
 
-                  {/* Winner Name */}
                   <td className="py-4 px-4 sm:px-6 whitespace-nowrap">
-                    <div className="font-bold text-slate-900 text-sm">{winner.name}</div>
-                    <div className="text-xs text-slate-500">{winner.positionTitle}</div>
+                    <div className="font-bold text-slate-950 text-sm">{winner.name}</div>
+                    <div className="text-xs text-slate-500 font-medium">{winner.positionTitle}</div>
                   </td>
 
-                  {/* School Name */}
                   <td className="py-4 px-4 sm:px-6">
-                    <span className="font-medium text-slate-800 text-xs block max-w-xs">
+                    <span className="font-medium text-slate-800 text-xs block max-w-xs leading-normal">
                       {winner.schoolName}
                     </span>
                   </td>
 
-                  {/* Class */}
-                  <td className="py-4 px-4 sm:px-6 whitespace-nowrap text-xs text-slate-600 font-medium">
+                  <td className="py-4 px-4 sm:px-6 whitespace-nowrap text-xs text-slate-700 font-semibold font-mono">
                     {winner.className}
                   </td>
 
-                  {/* Score */}
                   <td className="py-4 px-4 sm:px-6 whitespace-nowrap">
-                    <span className="inline-block font-mono font-bold text-slate-900 text-xs bg-slate-100 px-2 py-1 rounded border border-slate-200">
+                    <span className="font-mono font-extrabold text-slate-900 text-xs bg-slate-100 px-2 py-1 rounded border border-slate-200">
                       {winner.score} / {winner.maxScore}
                     </span>
                   </td>
 
-                  {/* Prize Details */}
                   <td className="py-4 px-4 sm:px-6">
-                    <span className="text-xs text-slate-700 font-medium leading-relaxed block max-w-sm">
+                    <span className="text-xs text-slate-700 font-medium block max-w-sm leading-relaxed">
                       {winner.prizeAwarded}
                     </span>
                   </td>
 
-                  {/* Certificate Link */}
                   <td className="py-4 px-4 sm:px-6 whitespace-nowrap text-right">
                     <Link
                       href={`/verify/${winner.regNo}/`}
-                      className="inline-flex items-center space-x-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200 transition-colors"
+                      className="inline-flex items-center space-x-1 text-xs font-bold text-slate-900 hover:text-blue-700 bg-white hover:bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-300 shadow-2xs transition-colors"
                     >
                       <span>Verify</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <ArrowUpRight className="w-3.5 h-3.5" />
                     </Link>
                   </td>
                 </tr>
@@ -179,8 +140,12 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
             ) : (
               <tr>
                 <td colSpan={8} className="py-12 text-center text-slate-500">
-                  <p className="text-sm font-medium">No ranker matched your filter query &quot;{filterQuery}&quot;</p>
-                  <p className="text-xs text-slate-400 mt-1">Try searching by candidate name, roll number, or school.</p>
+                  <p className="text-sm font-semibold text-slate-800">
+                    No ranker matched &quot;{filterQuery}&quot;
+                  </p>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Please check the candidate name or roll number.
+                  </p>
                 </td>
               </tr>
             )}
@@ -190,4 +155,3 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
     </div>
   );
 }
-

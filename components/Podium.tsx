@@ -3,9 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Trophy, Medal, Award, Sparkles, ExternalLink } from 'lucide-react';
+import { Trophy, Medal, Award, ArrowUpRight, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { PrizeWinner } from '@/types';
+import { AnimatedButton } from '@/components/ui/animated-button';
 
 interface PodiumProps {
   winners: PrizeWinner[];
@@ -20,49 +21,43 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
   const handleCelebrate = () => {
     try {
       confetti({
-        particleCount: 80,
-        spread: 70,
+        particleCount: 100,
+        spread: 80,
         origin: { y: 0.6 },
+        colors: ['#f59e0b', '#d97706', '#0f172a', '#2563eb', '#ffffff'],
       });
     } catch {
-      // safe fallback if canvas is restricted
+      // safe fallback
     }
   };
 
   return (
-    <div className="bg-gradient-to-b from-slate-900 to-slate-950 text-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-800 relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-amber-500/10 blur-3xl pointer-events-none"></div>
-
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-8 border-b border-slate-800/80">
+    <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-xl relative overflow-hidden">
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-8 border-b border-slate-800">
         <div>
-          <div className="flex items-center space-x-2 text-xs font-bold text-amber-400 uppercase tracking-widest">
-            <Sparkles className="w-4 h-4" />
-            <span>Championship Podium</span>
-          </div>
+          <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest block">
+            Podium of Distinction
+          </span>
           <h2 className="text-xl sm:text-2xl font-black text-white mt-1">{categoryTitle}</h2>
         </div>
 
-        <button
-          onClick={handleCelebrate}
-          className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs sm:text-sm shadow-md transition-all active:scale-95 cursor-pointer"
-        >
+        <AnimatedButton variant="gold" size="sm" onClick={handleCelebrate}>
           <Sparkles className="w-4 h-4 text-slate-950" />
           <span>Celebrate Champions</span>
-        </button>
+        </AnimatedButton>
       </div>
 
-      {/* 3-Step Podium Architecture */}
+      {/* Stepped Architectural Podium Grid */}
       <div className="pt-10 pb-4 max-w-4xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
-          {/* Rank 2 - Silver (Left) */}
+          {/* Step 2 - Silver (Left) */}
           <div className="order-2 md:order-1 flex flex-col items-center">
             {rank2 ? (
               <div className="w-full flex flex-col items-center group">
-                {/* Avatar / Photo */}
+                {/* Photo frame */}
                 <div className="relative mb-3">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-slate-300 shadow-lg bg-slate-800 flex items-center justify-center relative">
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-slate-400 bg-slate-800 flex items-center justify-center relative shadow-md">
                     {rank2.photoUrl ? (
                       <Image
                         src={rank2.photoUrl}
@@ -77,25 +72,22 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
                       </span>
                     )}
                   </div>
-                  <div className="absolute -bottom-2 -right-2 bg-slate-200 text-slate-900 rounded-full p-1.5 shadow-md border border-slate-400">
+                  <div className="absolute -bottom-2 -right-2 bg-slate-200 text-slate-950 rounded-full p-1.5 shadow-md border border-slate-400">
                     <Medal className="w-4 h-4" />
                   </div>
                 </div>
 
-                {/* Candidate Info */}
                 <div className="text-center mb-3">
-                  <h3 className="font-bold text-base text-white group-hover:text-slate-300 transition-colors">
-                    {rank2.name}
-                  </h3>
+                  <h3 className="font-bold text-base text-white">{rank2.name}</h3>
                   <p className="text-xs text-slate-400 line-clamp-1 max-w-[200px]">{rank2.schoolName}</p>
-                  <p className="text-xs font-mono text-slate-400 mt-0.5">
-                    Score: <span className="text-slate-200 font-semibold">{rank2.score}/{rank2.maxScore}</span>
+                  <p className="text-xs font-mono text-slate-300 mt-0.5">
+                    Score: <span className="font-bold">{rank2.score}/{rank2.maxScore}</span>
                   </p>
                 </div>
 
-                {/* Podium Stand Step */}
-                <div className="w-full bg-gradient-to-t from-slate-800 to-slate-700/80 rounded-2xl p-5 border border-slate-600/50 shadow-inner flex flex-col items-center min-h-[140px] justify-between">
-                  <div className="w-10 h-10 rounded-full bg-slate-300/20 text-slate-200 flex items-center justify-center font-black text-lg border border-slate-400/40">
+                {/* Stand Step */}
+                <div className="w-full bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-inner flex flex-col items-center min-h-[140px] justify-between">
+                  <div className="w-10 h-10 rounded-full bg-slate-700 text-slate-200 flex items-center justify-center font-mono font-black text-lg border border-slate-500">
                     2
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-300 mt-2">
@@ -106,10 +98,10 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
                   </div>
                   <Link
                     href={`/verify/${rank2.regNo}/`}
-                    className="mt-3 inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-700"
+                    className="mt-3 inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-700 transition-colors"
                   >
-                    <span>Certificate</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <span>View Certificate</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
@@ -118,18 +110,17 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
             )}
           </div>
 
-          {/* Rank 1 - Gold (Center, Tallest) */}
+          {/* Step 1 - Gold (Center, Tallest) */}
           <div className="order-1 md:order-2 flex flex-col items-center -mt-6">
             {rank1 ? (
               <div className="w-full flex flex-col items-center group">
-                {/* Crown / Trophy icon on top */}
-                <div className="text-amber-400 mb-2 animate-bounce">
+                <div className="text-amber-400 mb-2">
                   <Trophy className="w-7 h-7" />
                 </div>
 
-                {/* Avatar / Photo */}
+                {/* Photo frame */}
                 <div className="relative mb-3">
-                  <div className="w-24 h-24 rounded-2xl overflow-hidden border-4 border-amber-400 shadow-2xl bg-amber-950/40 flex items-center justify-center relative">
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden border-3 border-amber-400 bg-amber-950/40 flex items-center justify-center relative shadow-xl">
                     {rank1.photoUrl ? (
                       <Image
                         src={rank1.photoUrl}
@@ -144,27 +135,24 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
                       </span>
                     )}
                   </div>
-                  <div className="absolute -bottom-2 -right-2 bg-gradient-to-tr from-amber-500 to-amber-300 text-slate-950 rounded-full p-2 shadow-lg border-2 border-white">
+                  <div className="absolute -bottom-2 -right-2 bg-amber-500 text-slate-950 rounded-full p-2 shadow-lg border-2 border-white">
                     <Trophy className="w-4 h-4" />
                   </div>
                 </div>
 
-                {/* Candidate Info */}
                 <div className="text-center mb-3">
-                  <h3 className="font-extrabold text-lg text-white group-hover:text-amber-300 transition-colors">
-                    {rank1.name}
-                  </h3>
-                  <p className="text-xs text-amber-200/80 font-medium line-clamp-1 max-w-[220px]">
+                  <h3 className="font-extrabold text-lg text-white">{rank1.name}</h3>
+                  <p className="text-xs text-amber-200/90 font-medium line-clamp-1 max-w-[220px]">
                     {rank1.schoolName}
                   </p>
-                  <p className="text-xs font-mono text-slate-300 mt-0.5">
+                  <p className="text-xs font-mono text-slate-200 mt-0.5">
                     Score: <span className="text-amber-300 font-bold">{rank1.score}/{rank1.maxScore}</span>
                   </p>
                 </div>
 
-                {/* Podium Stand Step */}
-                <div className="w-full bg-gradient-to-t from-amber-950/90 via-amber-900/60 to-amber-800/50 rounded-2xl p-6 border-2 border-amber-500/70 shadow-2xl shadow-amber-500/10 flex flex-col items-center min-h-[180px] justify-between">
-                  <div className="w-12 h-12 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xl shadow-md border-2 border-amber-200">
+                {/* Stand Step */}
+                <div className="w-full bg-gradient-to-b from-amber-950/70 to-slate-900 rounded-2xl p-6 border-2 border-amber-500/80 shadow-2xl flex flex-col items-center min-h-[180px] justify-between">
+                  <div className="w-12 h-12 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center font-mono font-black text-xl border-2 border-amber-200 shadow-sm">
                     1
                   </div>
                   <span className="text-sm font-black uppercase tracking-wider text-amber-300 mt-2">
@@ -175,10 +163,10 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
                   </div>
                   <Link
                     href={`/verify/${rank1.regNo}/`}
-                    className="mt-4 inline-flex items-center space-x-1.5 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 px-4 py-2 rounded-xl shadow-md transition-colors"
+                    className="mt-4 inline-flex items-center space-x-1.5 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 px-4 py-2 rounded-xl transition-colors shadow-sm"
                   >
                     <span>View Gold Certificate</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
@@ -187,13 +175,13 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
             )}
           </div>
 
-          {/* Rank 3 - Bronze (Right) */}
+          {/* Step 3 - Bronze (Right) */}
           <div className="order-3 flex flex-col items-center">
             {rank3 ? (
               <div className="w-full flex flex-col items-center group">
-                {/* Avatar / Photo */}
+                {/* Photo frame */}
                 <div className="relative mb-3">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-amber-700 shadow-lg bg-slate-800 flex items-center justify-center relative">
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-amber-700 bg-slate-800 flex items-center justify-center relative shadow-md">
                     {rank3.photoUrl ? (
                       <Image
                         src={rank3.photoUrl}
@@ -213,23 +201,20 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
                   </div>
                 </div>
 
-                {/* Candidate Info */}
                 <div className="text-center mb-3">
-                  <h3 className="font-bold text-base text-white group-hover:text-amber-500 transition-colors">
-                    {rank3.name}
-                  </h3>
+                  <h3 className="font-bold text-base text-white">{rank3.name}</h3>
                   <p className="text-xs text-slate-400 line-clamp-1 max-w-[200px]">{rank3.schoolName}</p>
-                  <p className="text-xs font-mono text-slate-400 mt-0.5">
-                    Score: <span className="text-slate-200 font-semibold">{rank3.score}/{rank3.maxScore}</span>
+                  <p className="text-xs font-mono text-slate-300 mt-0.5">
+                    Score: <span className="font-bold">{rank3.score}/{rank3.maxScore}</span>
                   </p>
                 </div>
 
-                {/* Podium Stand Step */}
-                <div className="w-full bg-gradient-to-t from-slate-900 to-amber-950/40 rounded-2xl p-5 border border-amber-800/40 shadow-inner flex flex-col items-center min-h-[120px] justify-between">
-                  <div className="w-10 h-10 rounded-full bg-amber-800/30 text-amber-400 flex items-center justify-center font-black text-lg border border-amber-700/50">
+                {/* Stand Step */}
+                <div className="w-full bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-inner flex flex-col items-center min-h-[120px] justify-between">
+                  <div className="w-10 h-10 rounded-full bg-slate-700 text-amber-500 flex items-center justify-center font-mono font-black text-lg border border-amber-700/60">
                     3
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-amber-500 mt-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-amber-400 mt-2">
                     Bronze Medalist
                   </span>
                   <div className="text-[11px] text-slate-400 text-center mt-1 px-1 line-clamp-2">
@@ -237,10 +222,10 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
                   </div>
                   <Link
                     href={`/verify/${rank3.regNo}/`}
-                    className="mt-3 inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-700"
+                    className="mt-3 inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-700 transition-colors"
                   >
-                    <span>Certificate</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <span>View Certificate</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
@@ -253,4 +238,3 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
     </div>
   );
 }
-
