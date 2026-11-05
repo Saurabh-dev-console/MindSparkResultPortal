@@ -1,247 +1,149 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
   Trophy,
-  Award,
-  School,
-  ShieldCheck,
   ArrowRight,
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
-  Sparkles,
+  Camera,
+  ChevronDown,
 } from 'lucide-react';
-import StaticSearch from '@/components/StaticSearch';
-import { SpotlightCard } from '@/components/ui/spotlight-card';
-import { StatsCounter } from '@/components/ui/stats-counter';
 import { AnimatedButton } from '@/components/ui/animated-button';
-import HeroFilmstrip from '@/components/HeroFilmstrip';
+
+const heroImages = [
+  '/images/inauguration-dignitaries.webp',
+  '/images/STARTING-IMAGE-01.webp',
+  '/images/STARTING-IMAGE-02.webp',
+  '/images/EVENT-IMAGES-01.webp',
+  '/images/EVENT-IMAGES-02.webp',
+  '/images/EVENT-IMAGES-03.webp',
+  '/images/EVENT-IMAGES-04.webp',
+  '/images/EVENT-IMAGES-06.webp',
+  '/images/EVENT-IMAGES-07.webp',
+  '/images/EVENT-IMAGES-09.webp',
+  '/images/EVENT-IMAGES-10.webp',
+  '/images/EVENT-IMAGES-11.webp',
+  '/images/EVENT-IMAGES-12.webp',
+  '/images/EVENT-IMAGES-13.webp',
+  '/images/EVENT-IMAGES-14.webp',
+  '/images/EVENT-IMAGES-15.webp',
+  '/images/EVENT-IMAGES-16.webp',
+  '/images/EVENT-IMAGES-17.webp',
+  '/images/EVENT-IMAGES-18.webp',
+  '/images/EVENT-IMAGES-19.webp',
+  '/images/EVENT-IMAGES-20.webp',
+  '/images/EVENT-IMAGES-21.webp',
+  '/images/EVENT-IMAGES-22.webp',
+  '/images/EVENT-IMAGES-23.webp',
+  '/images/EVENT-IMAGES-24.webp',
+  '/images/EVENT-IMAGES-25.webp',
+  '/images/EVENT-IMAGES-26.webp',
+  '/images/EVENT-IMAGES-27.webp',
+  '/images/EVENT-IMAGES-28.webp',
+  '/images/EVENT-IMAGES-29.webp',
+  '/images/EVENT-IMAGES-30.webp',
+  '/images/EVENT-IMAGES-31.webp',
+  '/images/EVENT-IMAGES-32.webp',
+  '/images/EVENT-IMAGES-33.webp',
+];
 
 export default function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
+  const [currentIdx, setCurrentIdx] = useState(0);
 
-  // Auto-play attempt on mount
+  // Smooth cinematic cross-fade timer (transitions seamlessly every 5 seconds)
   useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.muted = true;
-      video.play().catch(() => {
-        // Fallback if browser requires user gesture
-        setIsPlaying(false);
-      });
-    }
+    const timer = setInterval(() => {
+      setCurrentIdx((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
   }, []);
 
-  const togglePlay = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (video.paused) {
-      video.play();
-      setIsPlaying(true);
-    } else {
-      video.pause();
-      setIsPlaying(false);
-    }
-  };
-
-  const toggleMute = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = !video.muted;
-    setIsMuted(video.muted);
-  };
-
-  const metrics = [
-    {
-      num: 18,
-      suffix: '',
-      label: 'Class-Wise Programmes',
-      subtext: 'From Play Group to College Group',
-      icon: Trophy,
-    },
-    {
-      num: 50,
-      suffix: '+',
-      label: 'Participating Schools',
-      subtext: 'Premier CBSE & State Institutions',
-      icon: School,
-    },
-    {
-      num: 100,
-      suffix: '+',
-      label: 'Medals & Distinction Honors',
-      subtext: 'Gold, Silver, Bronze & Merit',
-      icon: Award,
-    },
-    {
-      num: 100,
-      suffix: '%',
-      label: 'Digital Verified Records',
-      subtext: 'Tamper-proof pre-rendered certificates',
-      icon: ShieldCheck,
-    },
-  ];
-
   return (
-    <section className="relative overflow-hidden bg-slate-950 text-white border-b border-slate-800">
-      {/* 1. Full-Screen Cinematic Background Video Layer */}
+    <section className="relative bg-slate-950 text-white overflow-hidden border-b border-slate-800 min-h-[calc(100vh-80px)] flex flex-col justify-between py-12 sm:py-16">
+      {/* 1. Cinematic Seamless Cross-Fading Background Layer */}
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted={isMuted}
-          playsInline
-          preload="auto"
-          poster="/images/inauguration-dignitaries.webp"
-          className="w-full h-full object-cover opacity-50 scale-105 transition-opacity duration-700"
-        >
-          <source src="/videos/mindspark-hero-reel.mp4" type="video/mp4" />
-        </video>
+        {heroImages.map((src, idx) => {
+          const isCurrent = idx === currentIdx;
+          const isPrev = idx === (currentIdx - 1 + heroImages.length) % heroImages.length;
+          // Keep only active and previous frames mounted to ensure smooth 60fps performance
+          if (!isCurrent && !isPrev) return null;
 
-        {/* Multi-Stop Cinematic Scrim for 100% WCAG Contrast & Depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/70 to-slate-950/95" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,6,23,0.75)_100%)]" />
-      </div>
-
-      {/* 2. Main Foreground Hero Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 md:pt-16 md:pb-20">
-        <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
-          {/* Prominent Official Medallion Showcase */}
-          <div className="relative mb-6 group">
-            <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-red-500/50 shadow-2xl bg-white p-0.5 group-hover:scale-105 transition-transform duration-300">
+          return (
+            <div
+              key={src}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out ${
+                isCurrent ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              }`}
+            >
               <Image
-                src="/images/meena-shah-mindspark-emblem.webp"
-                alt="Meena Shah Public School - MINDSPARK 2026 Official Crest"
-                width={144}
-                height={144}
-                className="object-cover w-full h-full rounded-full"
-                priority
+                src={src}
+                alt="Mindspark 2026 Competition Arena"
+                fill
+                priority={idx === 0}
+                sizes="100vw"
+                className={`object-cover transform transition-transform duration-[7000ms] ease-out ${
+                  isCurrent ? 'scale-105' : 'scale-100'
+                }`}
               />
             </div>
-            <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 bg-slate-900 text-white font-mono text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-slate-700 shadow-lg whitespace-nowrap">
-              ESTD. MEENA SHAH
-            </div>
-          </div>
+          );
+        })}
 
-          {/* Official Tagline Badge */}
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/80 text-slate-200 text-xs font-bold uppercase tracking-wider backdrop-blur-md mb-4 shadow-md">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-            <span>MEENA SHAH PUBLIC SCHOOL • RAMNAGAR CAMPUS</span>
-          </div>
+        {/* High-Clarity Photographic Scrim: Clear vibrant images with protected text contrast */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-b from-slate-950/45 via-transparent to-slate-950/70 pointer-events-none" />
+        <div className="absolute inset-0 z-20 bg-[radial-gradient(ellipse_at_center,_rgba(2,6,23,0.55)_0%,_rgba(2,6,23,0.15)_60%,_transparent_100%)] pointer-events-none" />
+      </div>
 
-          {/* Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight drop-shadow-md">
-            MINDSPARK 2026 — OFFICIAL RANKERS & PRIZE WINNERS
-          </h1>
+      {/* Top Spacer for vertical balance */}
+      <div className="relative z-30" />
 
-          {/* Subtitle */}
-          <p className="mt-4 text-base sm:text-xl text-slate-300 max-w-2xl font-normal leading-relaxed drop-shadow-xs">
-            Honoring the young innovators, researchers, and distinction achievers across all 18 Class-Wise Competition Programmes.
-          </p>
+      {/* 2. Hero Center Content — Clean, Majestic, 100% Uncluttered */}
+      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center my-auto">
+        {/* Main Master Headline */}
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] max-w-4xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-100 to-white">
+            MINDSPARK 2026
+          </span>
+          <span className="block text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl mt-2 sm:mt-3 tracking-tight font-extrabold">
+            OFFICIAL RANKERS &amp; PRIZE WINNERS PORTAL
+          </span>
+        </h1>
 
-          {/* Client-Side Quick Search Bar with Frost Accent */}
-          <div className="mt-8 w-full max-w-2xl">
-            <div className="rounded-2xl shadow-2xl ring-1 ring-white/15 backdrop-blur-md">
-              <StaticSearch />
-            </div>
-            <div className="mt-3 text-xs text-slate-300 flex items-center justify-center space-x-2">
-              <span className="text-slate-400">Quick verify:</span>
-              <span className="font-mono bg-slate-900/90 px-2 py-0.5 rounded border border-slate-700 text-slate-200 font-bold shadow-2xs">
-                260101
-              </span>
-              <span className="text-slate-400">or</span>
-              <span className="font-mono bg-slate-900/90 px-2 py-0.5 rounded border border-slate-700 text-slate-200 font-bold shadow-2xs">
-                Aarav Sharma
-              </span>
-            </div>
-          </div>
+        {/* Subtitle */}
+        <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-slate-200 max-w-2xl font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+          Honoring certified rankers, medal recipients, and distinction achievers across all 18 Class-Wise Competition Programmes.
+        </p>
 
-          {/* Primary Action Buttons */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/results/">
-              <AnimatedButton variant="gold" size="lg">
-                <Trophy className="w-4 h-4 text-slate-950" />
-                <span>Explore All 18 Category Podiums</span>
-                <ArrowRight className="w-4 h-4 text-slate-900" />
-              </AnimatedButton>
-            </Link>
+        {/* Primary Action Buttons */}
+        <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full sm:w-auto">
+          <Link href="/results/" className="w-full sm:w-auto">
+            <AnimatedButton variant="gold" size="lg" className="w-full sm:w-auto shadow-xl font-bold">
+              <Trophy className="w-4 h-4 text-slate-950" />
+              <span>Explore 18 Programme Podiums</span>
+              <ArrowRight className="w-4 h-4 text-slate-900" />
+            </AnimatedButton>
+          </Link>
 
-            <Link href="/verify/">
-              <AnimatedButton variant="outline" size="lg" className="border-slate-600 bg-slate-900/70 hover:bg-slate-800 text-white backdrop-blur-md">
-                <Award className="w-4 h-4 text-red-500" />
-                <span>Verify & Download Certificate</span>
-              </AnimatedButton>
-            </Link>
-          </div>
-
-          {/* Floating Live Video Controller Pill */}
-          <div className="mt-7 inline-flex items-center space-x-3 bg-slate-900/80 backdrop-blur-md border border-slate-700/80 px-4 py-2 rounded-full shadow-lg text-xs font-mono text-slate-300">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-            </span>
-            <span className="font-bold text-white">Live Ceremony Video</span>
-            <span className="text-slate-600">|</span>
-            <button
-              onClick={togglePlay}
-              className="hover:text-white transition-colors cursor-pointer flex items-center space-x-1"
-              aria-label={isPlaying ? 'Pause background video' : 'Play background video'}
+          <Link href="/gallery/" className="w-full sm:w-auto">
+            <AnimatedButton
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto border-slate-500 bg-slate-950/70 hover:bg-slate-900 text-white backdrop-blur-md shadow-xl"
             >
-              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-white" />}
-              <span>{isPlaying ? 'Pause' : 'Play'}</span>
-            </button>
-            <span className="text-slate-600">|</span>
-            <button
-              onClick={toggleMute}
-              className="hover:text-white transition-colors cursor-pointer flex items-center space-x-1"
-              aria-label={isMuted ? 'Unmute video audio' : 'Mute video audio'}
-            >
-              {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-              <span>{isMuted ? 'Unmute' : 'Muted'}</span>
-            </button>
-          </div>
-        </div>
-
-        {/* 3. 4 Spotlight Metric Cards (Dark Cinema Theme) */}
-        <div className="mt-14 sm:mt-18 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {metrics.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <SpotlightCard
-                key={idx}
-                className="p-6 bg-slate-900/70 border-slate-800/80 backdrop-blur-md hover:border-slate-700 transition-colors text-white"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-slate-800/90 border border-slate-700 flex items-center justify-center text-slate-200">
-                    <Icon className="w-5 h-5 text-amber-400" />
-                  </div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 bg-slate-800/80 px-2.5 py-0.5 rounded border border-slate-700">
-                    Official
-                  </span>
-                </div>
-                <div className="text-3xl sm:text-4xl text-white font-black">
-                  <StatsCounter value={item.num} suffix={item.suffix} />
-                </div>
-                <div className="text-sm font-bold text-white mt-1">{item.label}</div>
-                <div className="text-xs text-slate-400 mt-0.5 leading-relaxed">{item.subtext}</div>
-              </SpotlightCard>
-            );
-          })}
+              <Camera className="w-4 h-4 text-amber-400" />
+              <span>Event Photo Archive</span>
+            </AnimatedButton>
+          </Link>
         </div>
       </div>
 
-      {/* 4. Infinite Continuous Filmstrip Ribbon Stream at Bottom of Hero */}
-      <div className="relative z-10 border-t border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
-        <HeroFilmstrip />
+      {/* 3. Subtle Scroll Down Indicator */}
+      <div className="relative z-30 pt-6 flex flex-col items-center pointer-events-none opacity-85 hover:opacity-100 transition-opacity">
+        <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-slate-300 mb-1.5 drop-shadow-md">
+          Scroll down to explore metrics &amp; results
+        </span>
+        <ChevronDown className="w-4 h-4 text-amber-400 animate-bounce" />
       </div>
     </section>
   );

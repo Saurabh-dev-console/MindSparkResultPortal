@@ -13,7 +13,7 @@ interface StaticSearchProps {
 }
 
 export default function StaticSearch({
-  placeholder = 'Search by Candidate Name, Roll No (e.g. 260101), Reg No, or School...',
+  placeholder = 'Search by Candidate Name, Roll No, or School...',
   className = '',
   limit = 6,
 }: StaticSearchProps) {
@@ -96,7 +96,7 @@ export default function StaticSearch({
               {filteredWinners.map((winner) => (
                 <Link
                   key={winner.id}
-                  href={`/verify/${winner.regNo}/`}
+                  href={`/results/?category=${winner.categoryId}`}
                   className="p-4 hover:bg-slate-50 transition-colors flex items-center justify-between group"
                 >
                   <div className="space-y-1">
@@ -107,10 +107,7 @@ export default function StaticSearch({
                       <RankBadge rank={winner.rank} />
                     </div>
                     <div className="text-xs text-slate-500 flex flex-wrap items-center gap-x-2 gap-y-0.5">
-                      <span className="font-mono font-bold text-slate-800 bg-slate-100 px-1.5 py-0.5 rounded">
-                        Roll: {winner.rollNo}
-                      </span>
-                      <span className="font-mono text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded">
+                      <span className="font-mono font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                         Reg: {winner.regNo}
                       </span>
                       <span>•</span>
@@ -122,7 +119,7 @@ export default function StaticSearch({
                   </div>
 
                   <div className="flex items-center space-x-1 text-slate-400 group-hover:text-slate-900 pl-3">
-                    <span className="text-xs font-bold hidden sm:inline">Certificate</span>
+                    <span className="text-xs font-bold hidden sm:inline">View Podium</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </Link>

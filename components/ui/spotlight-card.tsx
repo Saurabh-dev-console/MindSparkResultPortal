@@ -30,7 +30,7 @@ export function SpotlightCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setOpacity(1)}
       onMouseLeave={() => setOpacity(0)}
-      className={`relative overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-200 ${className}`}
+      className={`relative overflow-hidden rounded-2xl transition-all duration-200 ${className}`}
       {...props}
     >
       <div

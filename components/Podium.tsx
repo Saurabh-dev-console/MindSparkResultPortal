@@ -1,9 +1,8 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { Trophy, Medal, Award, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Trophy, Medal, Award, Sparkles, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { PrizeWinner } from '@/types';
 import { AnimatedButton } from '@/components/ui/animated-button';
@@ -21,10 +20,10 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
   const handleCelebrate = () => {
     try {
       confetti({
-        particleCount: 100,
-        spread: 80,
+        particleCount: 90,
+        spread: 75,
         origin: { y: 0.6 },
-        colors: ['#f59e0b', '#d97706', '#0f172a', '#2563eb', '#ffffff'],
+        colors: ['#f59e0b', '#d97706', '#3b82f6', '#ffffff', '#cbd5e1'],
       });
     } catch {
       // safe fallback
@@ -32,210 +31,316 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
   };
 
   return (
-    <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-xl relative overflow-hidden">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-8 border-b border-slate-800">
+    <div className="bg-slate-950 text-white rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-2xl relative overflow-hidden">
+      {/* Subtle architectural ambient backdrop */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-slate-950 to-slate-950 pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
+
+      {/* Header Bar */}
+      <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-8 border-b border-slate-800/90">
         <div>
-          <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest block">
-            Podium of Distinction
-          </span>
-          <h2 className="text-xl sm:text-2xl font-black text-white mt-1">{categoryTitle}</h2>
+          <div className="inline-flex items-center space-x-2 text-xs font-mono font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-md border border-amber-400/20 mb-2">
+            <Trophy className="w-3.5 h-3.5 text-amber-400" />
+            <span>Honors &amp; Medalists Podium</span>
+          </div>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight">
+            {categoryTitle}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            Top three certified podium positions validated by the academic jury.
+          </p>
         </div>
 
-        <AnimatedButton variant="gold" size="sm" onClick={handleCelebrate}>
+        <AnimatedButton variant="gold" size="sm" onClick={handleCelebrate} className="shrink-0">
           <Sparkles className="w-4 h-4 text-slate-950" />
           <span>Celebrate Champions</span>
         </AnimatedButton>
       </div>
 
-      {/* Stepped Architectural Podium Grid */}
-      <div className="pt-10 pb-4 max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
-          {/* Step 2 - Silver (Left) */}
-          <div className="order-2 md:order-1 flex flex-col items-center">
-            {rank2 ? (
-              <div className="w-full flex flex-col items-center group">
-                {/* Photo frame */}
-                <div className="relative mb-3">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-slate-400 bg-slate-800 flex items-center justify-center relative shadow-md shrink-0">
-                    {rank2.photoUrl ? (
-                      <Image
-                        src={rank2.photoUrl}
-                        alt={rank2.name}
-                        width={80}
-                        height={80}
-                        loading="lazy"
-                        className="object-cover w-full h-full"
-                      />
-                    ) : (
-                      <span className="text-xl font-bold text-slate-300">
-                        {rank2.name.charAt(0)}
-                      </span>
-                    )}
-                  </div>
-                  <div className="absolute -bottom-2 -right-2 bg-slate-200 text-slate-950 rounded-full p-1.5 shadow-md border border-slate-400">
-                    <Medal className="w-4 h-4" />
-                  </div>
+      {/* Podium Display: Responsive layout */}
+      {/* 1. Desktop & Tablet View (Stepped 2nd - 1st - 3rd) */}
+      <div className="relative z-10 hidden md:grid md:grid-cols-3 gap-6 items-end pt-12 pb-6 max-w-5xl mx-auto">
+        {/* Step 2 - Silver Medalist (Left) */}
+        <div className="flex flex-col items-center">
+          {rank2 ? (
+            <div className="w-full flex flex-col items-center group">
+              {/* Photo / Avatar */}
+              <div className="relative mb-4">
+                <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-slate-300 bg-slate-900 flex items-center justify-center relative shadow-lg">
+                  {rank2.photoUrl ? (
+                    <Image
+                      src={rank2.photoUrl}
+                      alt={rank2.name}
+                      width={80}
+                      height={80}
+                      loading="lazy"
+                      className="object-cover w-full h-full"
+                    />
+                  ) : (
+                    <span className="text-2xl font-black text-slate-200">
+                      {rank2.name.charAt(0)}
+                    </span>
+                  )}
                 </div>
-
-                <div className="text-center mb-3">
-                  <h3 className="font-bold text-base text-white">{rank2.name}</h3>
-                  <p className="text-xs text-slate-400 line-clamp-1 max-w-[200px]">{rank2.schoolName}</p>
-                  <p className="text-xs font-mono text-slate-300 mt-0.5">
-                    Score: <span className="font-bold">{rank2.score}/{rank2.maxScore}</span>
-                  </p>
+                <div className="absolute -bottom-2.5 -right-2.5 bg-slate-200 text-slate-950 rounded-full p-1.5 shadow-md border-2 border-slate-900">
+                  <Medal className="w-4 h-4 text-slate-800" />
                 </div>
+              </div>
 
-                {/* Stand Step */}
-                <div className="w-full bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-inner flex flex-col items-center min-h-[140px] justify-between">
-                  <div className="w-10 h-10 rounded-full bg-slate-700 text-slate-200 flex items-center justify-center font-mono font-black text-lg border border-slate-500">
-                    2
-                  </div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-300 mt-2">
+              {/* Candidate Info */}
+              <div className="text-center mb-4 px-2 w-full">
+                <h3 className="font-extrabold text-base text-white truncate" title={rank2.name}>
+                  {rank2.name}
+                </h3>
+                <p className="text-xs text-slate-400 truncate mt-0.5" title={rank2.schoolName}>
+                  {rank2.schoolName}
+                </p>
+                <div className="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono">
+                  <span className="text-slate-400">Reg No:</span>
+                  <span className="font-bold text-slate-200 tracking-wider">{rank2.regNo}</span>
+                </div>
+              </div>
+
+              {/* Pedestal Stand */}
+              <div className="w-full bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 rounded-2xl p-5 border border-slate-600/80 shadow-xl flex flex-col items-center min-h-[160px] justify-between relative overflow-hidden group-hover:border-slate-400 transition-colors">
+                <div className="w-11 h-11 rounded-full bg-slate-800 text-slate-200 flex items-center justify-center font-mono font-black text-lg border-2 border-slate-400 shadow-md">
+                  II
+                </div>
+                <div className="text-center my-2">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 block">
                     Silver Medalist
                   </span>
-                  <div className="text-[11px] text-slate-400 text-center mt-1 px-1 line-clamp-2">
+                  <p className="text-[11px] text-slate-400 mt-1 line-clamp-2 px-1">
                     {rank2.prizeAwarded}
-                  </div>
-                  <Link
-                    href={`/verify/${rank2.regNo}/`}
-                    className="mt-3 inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-700 transition-colors"
-                  >
-                    <span>View Certificate</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
+                  </p>
+                </div>
+                <div className="w-full pt-3 border-t border-slate-800 flex items-center justify-center gap-2 text-xs font-mono text-slate-300">
+                  <span className="text-slate-400">Registration:</span>
+                  <span className="font-bold text-white tracking-wider">{rank2.regNo}</span>
                 </div>
               </div>
-            ) : (
-              <div className="p-6 text-center text-xs text-slate-500">No Rank 2 Recorded</div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="w-full bg-slate-900/40 rounded-2xl p-8 border border-slate-800 text-center text-xs text-slate-500">
+              No Silver Medalist Recorded
+            </div>
+          )}
+        </div>
 
-          {/* Step 1 - Gold (Center, Tallest) */}
-          <div className="order-1 md:order-2 flex flex-col items-center -mt-6">
-            {rank1 ? (
-              <div className="w-full flex flex-col items-center group">
-                <div className="text-amber-400 mb-2">
-                  <Trophy className="w-7 h-7" />
+        {/* Step 1 - Gold Grand Champion (Center, Elevated) */}
+        <div className="flex flex-col items-center -mt-8">
+          {rank1 ? (
+            <div className="w-full flex flex-col items-center group">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 text-xs font-mono font-bold uppercase tracking-wider mb-2">
+                <Trophy className="w-3.5 h-3.5 text-amber-400" />
+                <span>Grand Champion</span>
+              </div>
+
+              {/* Photo / Avatar */}
+              <div className="relative mb-4">
+                <div className="w-24 h-24 rounded-2xl overflow-hidden border-3 border-amber-400 bg-amber-950/60 flex items-center justify-center relative shadow-[0_0_30px_rgba(245,158,11,0.25)]">
+                  {rank1.photoUrl ? (
+                    <Image
+                      src={rank1.photoUrl}
+                      alt={rank1.name}
+                      width={96}
+                      height={96}
+                      loading="lazy"
+                      className="object-cover w-full h-full"
+                    />
+                  ) : (
+                    <span className="text-3xl font-black text-amber-300">
+                      {rank1.name.charAt(0)}
+                    </span>
+                  )}
                 </div>
-
-                {/* Photo frame */}
-                <div className="relative mb-3">
-                  <div className="w-24 h-24 rounded-2xl overflow-hidden border-3 border-amber-400 bg-amber-950/40 flex items-center justify-center relative shadow-xl shrink-0">
-                    {rank1.photoUrl ? (
-                      <Image
-                        src={rank1.photoUrl}
-                        alt={rank1.name}
-                        width={96}
-                        height={96}
-                        loading="lazy"
-                        className="object-cover w-full h-full"
-                      />
-                    ) : (
-                      <span className="text-2xl font-bold text-amber-300">
-                        {rank1.name.charAt(0)}
-                      </span>
-                    )}
-                  </div>
-                  <div className="absolute -bottom-2 -right-2 bg-amber-500 text-slate-950 rounded-full p-2 shadow-lg border-2 border-white">
-                    <Trophy className="w-4 h-4" />
-                  </div>
+                <div className="absolute -bottom-3 -right-3 bg-amber-400 text-slate-950 rounded-full p-2 shadow-lg border-2 border-slate-950">
+                  <Trophy className="w-4 h-4 text-slate-950" />
                 </div>
+              </div>
 
-                <div className="text-center mb-3">
-                  <h3 className="font-extrabold text-lg text-white">{rank1.name}</h3>
-                  <p className="text-xs text-amber-200/90 font-medium line-clamp-1 max-w-[220px]">
-                    {rank1.schoolName}
-                  </p>
-                  <p className="text-xs font-mono text-slate-200 mt-0.5">
-                    Score: <span className="text-amber-300 font-bold">{rank1.score}/{rank1.maxScore}</span>
-                  </p>
+              {/* Candidate Info */}
+              <div className="text-center mb-4 px-2 w-full">
+                <h3 className="font-black text-lg text-white truncate" title={rank1.name}>
+                  {rank1.name}
+                </h3>
+                <p className="text-xs text-amber-200/90 truncate mt-0.5 font-medium" title={rank1.schoolName}>
+                  {rank1.schoolName}
+                </p>
+                <div className="mt-2 inline-flex items-center gap-2 px-3.5 py-1 rounded-lg bg-amber-950/60 border border-amber-500/40 text-xs font-mono">
+                  <span className="text-amber-400 font-semibold">Reg No:</span>
+                  <span className="font-black text-amber-200 tracking-wider text-sm">{rank1.regNo}</span>
                 </div>
+              </div>
 
-                {/* Stand Step */}
-                <div className="w-full bg-gradient-to-b from-amber-950/70 to-slate-900 rounded-2xl p-6 border-2 border-amber-500/80 shadow-2xl flex flex-col items-center min-h-[180px] justify-between">
-                  <div className="w-12 h-12 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center font-mono font-black text-xl border-2 border-amber-200 shadow-sm">
-                    1
-                  </div>
-                  <span className="text-sm font-black uppercase tracking-wider text-amber-300 mt-2">
-                    Grand Champion
+              {/* Pedestal Stand (Tallest) */}
+              <div className="w-full bg-gradient-to-b from-amber-950/80 via-slate-900 to-slate-950 rounded-2xl p-6 border-2 border-amber-400/90 shadow-[0_10px_40px_rgba(245,158,11,0.18)] flex flex-col items-center min-h-[200px] justify-between relative overflow-hidden group-hover:border-amber-300 transition-colors">
+                <div className="w-13 h-13 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center font-mono font-black text-2xl border-2 border-amber-200 shadow-md">
+                  I
+                </div>
+                <div className="text-center my-2">
+                  <span className="text-sm font-mono font-black uppercase tracking-wider text-amber-300 block">
+                    Gold Champion
                   </span>
-                  <div className="text-xs font-medium text-amber-100 text-center mt-1 px-2 line-clamp-2">
+                  <p className="text-xs text-amber-100/90 font-medium mt-1 line-clamp-2 px-1">
                     {rank1.prizeAwarded}
-                  </div>
-                  <Link
-                    href={`/verify/${rank1.regNo}/`}
-                    className="mt-4 inline-flex items-center space-x-1.5 text-xs font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 px-4 py-2 rounded-xl transition-colors shadow-sm"
-                  >
-                    <span>View Gold Certificate</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
-            ) : (
-              <div className="p-6 text-center text-xs text-slate-500">No Rank 1 Recorded</div>
-            )}
-          </div>
-
-          {/* Step 3 - Bronze (Right) */}
-          <div className="order-3 flex flex-col items-center">
-            {rank3 ? (
-              <div className="w-full flex flex-col items-center group">
-                {/* Photo frame */}
-                <div className="relative mb-3">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-amber-700 bg-slate-800 flex items-center justify-center relative shadow-md shrink-0">
-                    {rank3.photoUrl ? (
-                      <Image
-                        src={rank3.photoUrl}
-                        alt={rank3.name}
-                        width={80}
-                        height={80}
-                        loading="lazy"
-                        className="object-cover w-full h-full"
-                      />
-                    ) : (
-                      <span className="text-xl font-bold text-amber-600">
-                        {rank3.name.charAt(0)}
-                      </span>
-                    )}
-                  </div>
-                  <div className="absolute -bottom-2 -right-2 bg-amber-700 text-white rounded-full p-1.5 shadow-md border border-amber-500">
-                    <Medal className="w-4 h-4" />
-                  </div>
-                </div>
-
-                <div className="text-center mb-3">
-                  <h3 className="font-bold text-base text-white">{rank3.name}</h3>
-                  <p className="text-xs text-slate-400 line-clamp-1 max-w-[200px]">{rank3.schoolName}</p>
-                  <p className="text-xs font-mono text-slate-300 mt-0.5">
-                    Score: <span className="font-bold">{rank3.score}/{rank3.maxScore}</span>
                   </p>
                 </div>
+                <div className="w-full pt-3 border-t border-amber-500/30 flex items-center justify-center gap-2 text-xs font-mono">
+                  <span className="text-amber-400/80">Registration:</span>
+                  <span className="font-black text-amber-200 tracking-wider text-sm">{rank1.regNo}</span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="w-full bg-slate-900/40 rounded-2xl p-8 border border-slate-800 text-center text-xs text-slate-500">
+              No Gold Champion Recorded
+            </div>
+          )}
+        </div>
 
-                {/* Stand Step */}
-                <div className="w-full bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-inner flex flex-col items-center min-h-[120px] justify-between">
-                  <div className="w-10 h-10 rounded-full bg-slate-700 text-amber-500 flex items-center justify-center font-mono font-black text-lg border border-amber-700/60">
-                    3
-                  </div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-amber-400 mt-2">
+        {/* Step 3 - Bronze Medalist (Right) */}
+        <div className="flex flex-col items-center">
+          {rank3 ? (
+            <div className="w-full flex flex-col items-center group">
+              {/* Photo / Avatar */}
+              <div className="relative mb-4">
+                <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-amber-700 bg-slate-900 flex items-center justify-center relative shadow-lg">
+                  {rank3.photoUrl ? (
+                    <Image
+                      src={rank3.photoUrl}
+                      alt={rank3.name}
+                      width={80}
+                      height={80}
+                      loading="lazy"
+                      className="object-cover w-full h-full"
+                    />
+                  ) : (
+                    <span className="text-2xl font-black text-amber-600">
+                      {rank3.name.charAt(0)}
+                    </span>
+                  )}
+                </div>
+                <div className="absolute -bottom-2.5 -right-2.5 bg-amber-700 text-white rounded-full p-1.5 shadow-md border-2 border-slate-900">
+                  <Medal className="w-4 h-4 text-amber-200" />
+                </div>
+              </div>
+
+              {/* Candidate Info */}
+              <div className="text-center mb-4 px-2 w-full">
+                <h3 className="font-extrabold text-base text-white truncate" title={rank3.name}>
+                  {rank3.name}
+                </h3>
+                <p className="text-xs text-slate-400 truncate mt-0.5" title={rank3.schoolName}>
+                  {rank3.schoolName}
+                </p>
+                <div className="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono">
+                  <span className="text-slate-400">Reg No:</span>
+                  <span className="font-bold text-amber-400 tracking-wider">{rank3.regNo}</span>
+                </div>
+              </div>
+
+              {/* Pedestal Stand */}
+              <div className="w-full bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 rounded-2xl p-5 border border-amber-800/80 shadow-xl flex flex-col items-center min-h-[140px] justify-between relative overflow-hidden group-hover:border-amber-600 transition-colors">
+                <div className="w-11 h-11 rounded-full bg-slate-800 text-amber-500 flex items-center justify-center font-mono font-black text-lg border-2 border-amber-700 shadow-md">
+                  III
+                </div>
+                <div className="text-center my-2">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-400 block">
                     Bronze Medalist
                   </span>
-                  <div className="text-[11px] text-slate-400 text-center mt-1 px-1 line-clamp-2">
+                  <p className="text-[11px] text-slate-400 mt-1 line-clamp-2 px-1">
                     {rank3.prizeAwarded}
-                  </div>
-                  <Link
-                    href={`/verify/${rank3.regNo}/`}
-                    className="mt-3 inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-700 transition-colors"
-                  >
-                    <span>View Certificate</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
+                  </p>
+                </div>
+                <div className="w-full pt-3 border-t border-slate-800 flex items-center justify-center gap-2 text-xs font-mono text-slate-300">
+                  <span className="text-slate-400">Registration:</span>
+                  <span className="font-bold text-white tracking-wider">{rank3.regNo}</span>
                 </div>
               </div>
-            ) : (
-              <div className="p-6 text-center text-xs text-slate-500">No Rank 3 Recorded</div>
-            )}
+            </div>
+          ) : (
+            <div className="w-full bg-slate-900/40 rounded-2xl p-8 border border-slate-800 text-center text-xs text-slate-500">
+              No Bronze Medalist Recorded
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* 2. Mobile View: Responsive Hierarchical Stack (Rank 1 Gold -> Rank 2 Silver -> Rank 3 Bronze) */}
+      <div className="relative z-10 md:hidden flex flex-col gap-4 pt-6">
+        {/* Rank 1 Gold Mobile Card */}
+        {rank1 && (
+          <div className="bg-gradient-to-b from-amber-950/70 to-slate-900 rounded-2xl p-5 border-2 border-amber-400/90 shadow-xl">
+            <div className="flex items-center justify-between mb-3">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-xs font-mono font-black uppercase">
+                <Trophy className="w-3.5 h-3.5" />
+                <span>Rank 1 (Gold)</span>
+              </span>
+              <span className="text-xs font-mono font-black text-amber-300 tracking-wider">
+                {rank1.regNo}
+              </span>
+            </div>
+            <h3 className="font-black text-lg text-white">{rank1.name}</h3>
+            <p className="text-xs text-amber-200/90 font-medium mt-0.5">{rank1.schoolName}</p>
+            <p className="text-xs text-slate-300 mt-2 line-clamp-2">{rank1.prizeAwarded}</p>
+            <div className="mt-3 pt-3 border-t border-amber-500/30 flex items-center justify-between text-xs font-mono">
+              <span className="text-slate-400">Registration: <span className="text-amber-200 font-bold">{rank1.regNo}</span></span>
+            </div>
           </div>
+        )}
+
+        {/* Rank 2 Silver Mobile Card */}
+        {rank2 && (
+          <div className="bg-slate-900 rounded-2xl p-5 border border-slate-600 shadow-md">
+            <div className="flex items-center justify-between mb-3">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-950 text-xs font-mono font-bold uppercase">
+                <Medal className="w-3.5 h-3.5" />
+                <span>Rank 2 (Silver)</span>
+              </span>
+              <span className="text-xs font-mono font-bold text-slate-200 tracking-wider">
+                {rank2.regNo}
+              </span>
+            </div>
+            <h3 className="font-bold text-base text-white">{rank2.name}</h3>
+            <p className="text-xs text-slate-400 mt-0.5">{rank2.schoolName}</p>
+            <p className="text-xs text-slate-300 mt-2 line-clamp-2">{rank2.prizeAwarded}</p>
+            <div className="mt-3 pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
+              <span className="text-slate-400">Registration: <span className="text-slate-200 font-bold">{rank2.regNo}</span></span>
+            </div>
+          </div>
+        )}
+
+        {/* Rank 3 Bronze Mobile Card */}
+        {rank3 && (
+          <div className="bg-slate-900 rounded-2xl p-5 border border-amber-800 shadow-md">
+            <div className="flex items-center justify-between mb-3">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-700 text-white text-xs font-mono font-bold uppercase">
+                <Medal className="w-3.5 h-3.5" />
+                <span>Rank 3 (Bronze)</span>
+              </span>
+              <span className="text-xs font-mono font-bold text-amber-400 tracking-wider">
+                {rank3.regNo}
+              </span>
+            </div>
+            <h3 className="font-bold text-base text-white">{rank3.name}</h3>
+            <p className="text-xs text-slate-400 mt-0.5">{rank3.schoolName}</p>
+            <p className="text-xs text-slate-300 mt-2 line-clamp-2">{rank3.prizeAwarded}</p>
+            <div className="mt-3 pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
+              <span className="text-slate-400">Registration: <span className="text-slate-200 font-bold">{rank3.regNo}</span></span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Footer Audit Seal */}
+      <div className="relative z-10 mt-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-400 font-mono">
+        <div className="flex items-center space-x-2">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <span>Jury Certified Academic Results • Ramnagar Campus Main Arena</span>
+        </div>
+        <div className="text-slate-400">
+          Affiliated to CBSE, New Delhi • Official Rankers Ledger
         </div>
       </div>
     </div>

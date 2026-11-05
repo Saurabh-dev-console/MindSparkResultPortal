@@ -8,12 +8,15 @@ interface StatsCounterProps {
   duration?: number;
 }
 
-export function StatsCounter({ value, suffix = '', duration = 1200 }: StatsCounterProps) {
-  const [count, setCount] = useState(0);
+export function StatsCounter({ value, suffix = '', duration = 1000 }: StatsCounterProps) {
+  // Initialize with actual value so it NEVER displays '0' in static HTML or slow JS hydration!
+  const [count, setCount] = useState(value);
 
   useEffect(() => {
     let startTime: number | null = null;
     let animationFrameId: number;
+
+    setCount(0); // Only animate if client JS is actively running
 
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
@@ -35,10 +38,9 @@ export function StatsCounter({ value, suffix = '', duration = 1200 }: StatsCount
   }, [value, duration]);
 
   return (
-    <span className="font-mono tracking-tight font-extrabold text-slate-900">
+    <span className="font-mono tracking-tight font-black text-inherit">
       {count}
       {suffix}
     </span>
   );
 }
-

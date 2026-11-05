@@ -19,11 +19,11 @@ export default function NotFound() {
 
         <div className="mt-6 flex flex-col sm:flex-row gap-2.5">
           <Link
-            href="/verify/"
-            className="flex-1 inline-flex items-center justify-center space-x-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-4 rounded-xl shadow-xs transition-colors"
+            href="/results/"
+            className="flex-1 inline-flex items-center justify-center space-x-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 px-4 rounded-xl shadow-xs transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Search Roll No</span>
+            <Trophy className="w-4 h-4 text-amber-400" />
+            <span>View All Rankers</span>
           </Link>
           <Link
             href="/"
