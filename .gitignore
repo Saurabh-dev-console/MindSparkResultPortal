@@ -32,3 +32,8 @@ next-env.d.ts
 # agent data & knowledge graph
 /.agent-data/
 
+# Private Billing & Invoices
+*.pdf
+*Invoice*
+
+config.bat
