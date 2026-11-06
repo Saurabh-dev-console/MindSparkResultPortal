@@ -5,7 +5,7 @@ export interface PrizeWinner {
   regNo: string;
   rollNo: string;
   name: string;
-  schoolName: string;
+  schoolName?: string;
   className: string;
   categoryId: string;
   categoryName: string;

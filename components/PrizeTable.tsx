@@ -29,7 +29,7 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
       result = result.filter(
         (w) =>
           w.name.toLowerCase().includes(q) ||
-          w.schoolName.toLowerCase().includes(q) ||
+          (w.schoolName && w.schoolName.toLowerCase().includes(q)) ||
           w.rollNo.toLowerCase().includes(q) ||
           w.regNo.toLowerCase().includes(q) ||
           w.className.toLowerCase().includes(q)
@@ -175,7 +175,6 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
               <th scope="col" className="py-4 px-6">Official Standing</th>
               <th scope="col" className="py-4 px-6">Registration No</th>
               <th scope="col" className="py-4 px-6">Candidate Details</th>
-              <th scope="col" className="py-4 px-6">Affiliated Institution</th>
               <th scope="col" className="py-4 px-6">Class Group</th>
               <th scope="col" className="py-4 px-6">Honors &amp; Citation</th>
             </tr>
@@ -205,13 +204,6 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
                     <div className="text-xs text-slate-500 font-medium">{winner.positionTitle}</div>
                   </td>
 
-                  {/* Institution */}
-                  <td className="py-4 px-6">
-                    <span className="font-semibold text-slate-800 text-xs block max-w-xs leading-normal">
-                      {winner.schoolName}
-                    </span>
-                  </td>
-
                   {/* Class */}
                   <td className="py-4 px-6 whitespace-nowrap text-xs text-slate-700 font-bold font-mono">
                     <span className="px-2.5 py-1 rounded bg-slate-100 text-slate-800 border border-slate-200">
@@ -229,7 +221,7 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
               ))
             ) : (
               <tr>
-                <td colSpan={6} className="py-14 text-center text-slate-500">
+                <td colSpan={5} className="py-14 text-center text-slate-500">
                   <div className="max-w-md mx-auto">
                     <p className="text-base font-bold text-slate-900">
                       No rankers found matching your criteria
@@ -267,7 +259,7 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
               </div>
 
               <h4 className="font-black text-base text-slate-950">{winner.name}</h4>
-              <p className="text-xs text-slate-600 font-medium mt-0.5">{winner.schoolName}</p>
+              {winner.schoolName && <p className="text-xs text-slate-600 font-medium mt-0.5">{winner.schoolName}</p>}
 
               <div className="mt-3 flex items-center justify-between text-xs font-mono pt-3 border-t border-slate-100">
                 <span className="text-slate-500">Class: <strong className="text-slate-800">{winner.className}</strong></span>
@@ -297,7 +289,7 @@ export default function PrizeTable({ winners, categoryName }: PrizeTableProps) {
           <span>Showing {filtered.length} of {winners.length} certified rankers</span>
         </div>
         <div className="text-slate-600 font-semibold">
-          Certified by Meena Shah Public School Academic Committee
+          Organized, Managed &amp; Certified by Meena Shah Public School
         </div>
       </div>
     </div>

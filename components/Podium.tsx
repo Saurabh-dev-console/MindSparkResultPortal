@@ -92,8 +92,8 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
                 <h3 className="font-extrabold text-base text-white truncate" title={rank2.name}>
                   {rank2.name}
                 </h3>
-                <p className="text-xs text-slate-400 truncate mt-0.5" title={rank2.schoolName}>
-                  {rank2.schoolName}
+                <p className="text-xs text-slate-400 truncate mt-0.5">
+                  Class: {rank2.className}
                 </p>
                 <div className="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono">
                   <span className="text-slate-400">Reg No:</span>
@@ -164,8 +164,8 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
                 <h3 className="font-black text-lg text-white truncate" title={rank1.name}>
                   {rank1.name}
                 </h3>
-                <p className="text-xs text-amber-200/90 truncate mt-0.5 font-medium" title={rank1.schoolName}>
-                  {rank1.schoolName}
+                <p className="text-xs text-amber-200/90 truncate mt-0.5 font-medium">
+                  Class: {rank1.className}
                 </p>
                 <div className="mt-2 inline-flex items-center gap-2 px-3.5 py-1 rounded-lg bg-amber-950/60 border border-amber-500/40 text-xs font-mono">
                   <span className="text-amber-400 font-semibold">Reg No:</span>
@@ -231,8 +231,8 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
                 <h3 className="font-extrabold text-base text-white truncate" title={rank3.name}>
                   {rank3.name}
                 </h3>
-                <p className="text-xs text-slate-400 truncate mt-0.5" title={rank3.schoolName}>
-                  {rank3.schoolName}
+                <p className="text-xs text-slate-400 truncate mt-0.5">
+                  Class: {rank3.className}
                 </p>
                 <div className="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono">
                   <span className="text-slate-400">Reg No:</span>
@@ -282,7 +282,7 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
               </span>
             </div>
             <h3 className="font-black text-lg text-white">{rank1.name}</h3>
-            <p className="text-xs text-amber-200/90 font-medium mt-0.5">{rank1.schoolName}</p>
+            <p className="text-xs text-amber-200/90 font-medium mt-0.5">Class: {rank1.className}</p>
             <p className="text-xs text-slate-300 mt-2 line-clamp-2">{rank1.prizeAwarded}</p>
             <div className="mt-3 pt-3 border-t border-amber-500/30 flex items-center justify-between text-xs font-mono">
               <span className="text-slate-400">Registration: <span className="text-amber-200 font-bold">{rank1.regNo}</span></span>
@@ -303,7 +303,7 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
               </span>
             </div>
             <h3 className="font-bold text-base text-white">{rank2.name}</h3>
-            <p className="text-xs text-slate-400 mt-0.5">{rank2.schoolName}</p>
+            <p className="text-xs text-slate-400 mt-0.5">Class: {rank2.className}</p>
             <p className="text-xs text-slate-300 mt-2 line-clamp-2">{rank2.prizeAwarded}</p>
             <div className="mt-3 pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
               <span className="text-slate-400">Registration: <span className="text-slate-200 font-bold">{rank2.regNo}</span></span>
@@ -324,7 +324,7 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
               </span>
             </div>
             <h3 className="font-bold text-base text-white">{rank3.name}</h3>
-            <p className="text-xs text-slate-400 mt-0.5">{rank3.schoolName}</p>
+            <p className="text-xs text-slate-400 mt-0.5">Class: {rank3.className}</p>
             <p className="text-xs text-slate-300 mt-2 line-clamp-2">{rank3.prizeAwarded}</p>
             <div className="mt-3 pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
               <span className="text-slate-400">Registration: <span className="text-slate-200 font-bold">{rank3.regNo}</span></span>
@@ -337,7 +337,7 @@ export default function Podium({ winners, categoryTitle }: PodiumProps) {
       <div className="relative z-10 mt-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-400 font-mono">
         <div className="flex items-center space-x-2">
           <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-          <span>Jury Certified Academic Results • Ramnagar Campus Main Arena</span>
+          <span>Organized &amp; Certified by Meena Shah Public School • Ramnagar Campus Arena</span>
         </div>
         <div className="text-slate-400">
           Affiliated to CBSE, New Delhi • Official Rankers Ledger

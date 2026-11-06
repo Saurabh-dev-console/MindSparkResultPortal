@@ -8,6 +8,7 @@ import {
   ArrowRight,
   Camera,
   ChevronDown,
+  ShieldCheck,
 } from 'lucide-react';
 import { AnimatedButton } from '@/components/ui/animated-button';
 
@@ -100,6 +101,12 @@ export default function Hero() {
 
       {/* 2. Hero Center Content — Clean, Majestic, 100% Uncluttered */}
       <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center my-auto">
+        {/* Organizer & Host Badge */}
+        <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-400/40 text-amber-300 text-xs sm:text-sm font-mono font-bold tracking-wider uppercase mb-5 backdrop-blur-md shadow-xl">
+          <ShieldCheck className="w-4 h-4 text-amber-400 shrink-0" />
+          <span>Organized &amp; Hosted by Meena Shah Public School</span>
+        </div>
+
         {/* Main Master Headline */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] max-w-4xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-100 to-white">
@@ -112,7 +119,7 @@ export default function Hero() {
 
         {/* Subtitle */}
         <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-slate-200 max-w-2xl font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
-          Honoring certified rankers, medal recipients, and distinction achievers across all 18 Class-Wise Competition Programmes.
+          Organized and hosted by Meena Shah Public School • Honoring certified rankers, medal recipients, and distinction achievers across all 18 Class-Wise Competition Programmes.
         </p>
 
         {/* Primary Action Buttons */}

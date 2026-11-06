@@ -392,9 +392,9 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* School & Class */}
+                  {/* Class Group */}
                   <p className="text-xs text-slate-300 font-medium">
-                    {champion.schoolName} <span className="text-slate-500">({champion.className})</span>
+                    Class Group: <span className="text-amber-300 font-semibold">{champion.className}</span>
                   </p>
 
                   {/* Official Award Plaque */}

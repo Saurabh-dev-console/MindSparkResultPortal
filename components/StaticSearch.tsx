@@ -13,7 +13,7 @@ interface StaticSearchProps {
 }
 
 export default function StaticSearch({
-  placeholder = 'Search by Candidate Name, Roll No, or School...',
+  placeholder = 'Search by Candidate Name, Roll No, or Class...',
   className = '',
   limit = 6,
 }: StaticSearchProps) {
@@ -42,8 +42,9 @@ export default function StaticSearch({
           winner.name.toLowerCase().includes(q) ||
           winner.regNo.toLowerCase().includes(q) ||
           winner.rollNo.toLowerCase().includes(q) ||
-          winner.schoolName.toLowerCase().includes(q) ||
-          winner.categoryName.toLowerCase().includes(q)
+          (winner.schoolName && winner.schoolName.toLowerCase().includes(q)) ||
+          winner.categoryName.toLowerCase().includes(q) ||
+          winner.className.toLowerCase().includes(q)
         );
       })
       .slice(0, limit);
@@ -110,8 +111,12 @@ export default function StaticSearch({
                       <span className="font-mono font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                         Reg: {winner.regNo}
                       </span>
-                      <span>•</span>
-                      <span className="text-slate-700 font-medium">{winner.schoolName}</span>
+                      {winner.schoolName && (
+                        <>
+                          <span>•</span>
+                          <span className="text-slate-700 font-medium">{winner.schoolName}</span>
+                        </>
+                      )}
                     </div>
                     <div className="text-xs text-slate-700 font-medium">
                       {winner.categoryName} ({winner.className})

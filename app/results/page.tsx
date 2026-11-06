@@ -155,7 +155,7 @@ function ResultsContent() {
         <div className="text-center max-w-4xl mx-auto flex flex-col items-center mb-16">
           <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-widest bg-amber-400/10 text-amber-400 border border-amber-400/25 mb-5 shadow-sm">
             <Trophy className="w-3.5 h-3.5 text-amber-400" />
-            <span>Official Academic Results Ledger • 18 Programmes</span>
+            <span>Organized &amp; Certified by Meena Shah Public School • 18 Programmes</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
@@ -163,7 +163,7 @@ function ResultsContent() {
           </h1>
 
           <p className="mt-4 text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed">
-            Certified rankers, podium medalists, and merit distinction achievers across all 18 Class-Wise Competition Programmes.
+            Official inter-school results organized and hosted by Meena Shah Public School. Certified rankers, podium medalists, and merit distinction achievers across all 18 Class-Wise Competition Programmes.
           </p>
         </div>
 

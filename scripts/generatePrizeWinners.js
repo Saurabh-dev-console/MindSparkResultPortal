@@ -212,7 +212,6 @@ parsedEvents.forEach((ev) => {
       regNo,
       rollNo: regNo, // Exact MS2611... number as given in Excel
       name: cleanName,
-      schoolName: 'Meena Shah Public School',
       className: matchedCat.className,
       categoryId: matchedCat.id,
       categoryName: matchedCat.name,
@@ -250,7 +249,6 @@ allWinners.forEach(w => {
   tsCode += `    regNo: '${w.regNo}',\n`;
   tsCode += `    rollNo: '${w.rollNo}',\n`;
   tsCode += `    name: ${JSON.stringify(w.name)},\n`;
-  tsCode += `    schoolName: ${JSON.stringify(w.schoolName)},\n`;
   tsCode += `    className: ${JSON.stringify(w.className)},\n`;
   tsCode += `    categoryId: '${w.categoryId}',\n`;
   tsCode += `    categoryName: ${JSON.stringify(w.categoryName)},\n`;
